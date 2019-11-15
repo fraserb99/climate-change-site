@@ -2,9 +2,9 @@
 class Database {
 	
 private $server = "devweb2019.cis.strath.ac.uk";
-private $db = "pkb17140";
-private $user = "pkb17140";
-private $pass = "Resh2yaiw5ie";
+private $db = "cs312ab";
+private $user = "cs312ab";
+private $pass = "chio9PeNeXei";
 	
 public $conn;
 
