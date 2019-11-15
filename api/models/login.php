@@ -35,8 +35,7 @@ if($userExists && password_verify($data->password, $user->password)){
        "nbf" => $nbf,
        "data" => array(
            "id" => $user->id,
-           "username" => $user->username,
-           "email" => $user->email
+           "username" => $user->username
        )
     );
  
