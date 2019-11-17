@@ -13,9 +13,9 @@ public function connection(){
         $this->conn = null;
  
         try{
-            $this->conn = new PDO("mysql:host=" . $this->server . ";dbname=" . $this->db, $this->user $this->pass);
+            $this->conn = new PDO("mysql:host=" . $this->server . ";dbname=" . $this->db, $this->user, $this->pass);
         }catch(PDOException $exception){
-            echo "Error Cinnecting: " . $exception->getMessage();
+            echo "Error Connecting: " . $exception->getMessage();
         }
  
         return $this->conn;

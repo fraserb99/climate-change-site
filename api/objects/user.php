@@ -28,19 +28,17 @@ class User{
 		$this->username=htmlspecialchars(strip_tags($this->username));
 		$this->email=htmlspecialchars(strip_tags($this->email));
 		$this->password=htmlspecialchars(strip_tags($this->password));
-	 
 
-		$statement->bindParam(':username', $this->firstname);
+		$statement->bindValue(':username', $this->username);
 		
-		$statement->bindParam(':email', $this->email);
+		$statement->bindValue(':email', $this->email);
 	 
 		$hash = password_hash($this->password, PASSWORD_DEFAULT);
-		$statement->bindParam(':password', $hash);
+		$statement->bindValue(':password', $hash);
 	 
 		if($statement->execute()){
 			return true;
 		}
-	 
 		return false;
 	}
 	 
