@@ -9,7 +9,7 @@ const enhance = compose(
     withHandlers({
         handleSubmit: () => (values, { setSubmitting }) => {
             try {
-                const response = fetch(buildUrl('login.php'), {
+                const response = fetch(buildUrl('models/login.php'), {
                     method: 'POST',
                     headers: {'Content-Type':'application/json'},
                     body: JSON.stringify({
