@@ -11,28 +11,30 @@ include_once '../library/php-jwt-master/src/SignatureInvalidException.php';
 include_once '../library/php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;
 
+
 include_once '../config/database.php';
-include_once '../objects/user.php';
+include_once 'model/user.php';
+include_once 'validate_token.php';
+include_once 'user_service.php';
+
+
+
  
 $database = new Database();
 $db = $database->getConnection();
 
-$user = new User($db);
- 
+$userService = new UserService($db);
+$user = new User();
 $data = json_decode(file_get_contents("php://input"));
- 
-$jwt=isset($data->jwt) ? $data->jwt : "";
 
-if($jwt){
-     try {
-        $decoded = JWT::decode($jwt, $key, array('HS256'));
+if(validate($data)){
 		
-		$user->username = $data->username;
-		$user->email = $data->email;
-		$user->password = $data->password;
-		$user->id = $decoded->data->id;
+		$user->setUsername($data->username);
+		$user->setEmail($data->email);
+		$user->setPassword($data->password);
+		$user->setID($decoded->data->id);
 
-		if($user->update()){
+		if($userService->update($user)){
 			
 			$token = array(
 			   "iss" => $iss,
@@ -40,8 +42,8 @@ if($jwt){
 			   "iat" => $iat,
 			   "nbf" => $nbf,
 			   "data" => array(
-				   "id" => $user->id,
-				   "username" => $user->username
+				   "id" => $user->getID(),
+				   "username" => $user->getUsername()
 			   )
 			);
 			
@@ -50,27 +52,18 @@ if($jwt){
 			http_response_code(200);
 			echo json_encode(
 					array(
-						"message" => "Success.",
 						"jwt" => $jwt
 					)
 				);
 				
 		}else{
 			http_response_code(401);
-			echo json_encode(array("response" => "Failed."));
+			echo json_encode(array("response" => "Failed, couldn't update user for some reason."));
 		}
-    }catch (Exception $e){
- 
-		http_response_code(401);
-		echo json_encode(array(
-			"response" => "Failed.",
-			"error" => $e->getMessage()
-		));
-	}
+  
 }else{
- 
-    http_response_code(401);
-    echo json_encode(array("response" => "Failed"));
+	http_response_code(401);
+	echo json_encode(array("response" => "Access Denied."));
 }
  
 ?>

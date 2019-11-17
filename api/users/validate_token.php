@@ -12,29 +12,32 @@ include_once '../library/php-jwt-master/src/SignatureInvalidException.php';
 include_once '../library/php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;
 
-$data = json_decode(file_get_contents("php://input"));
+$decoded = null;
  
-$jwt=isset($data->jwt) ? $data->jwt : ""; //gets the jwt
- 
-if($jwt){
-    try {
-        $decoded = JWT::decode($jwt, $key, array('HS256')); //decodes the jwt
-        http_response_code(200);
-        echo json_encode(array(
-            "response" => "Success.",
-            "data" => $decoded->data
-        ));
-    }catch (Exception $e){
+
+
+public function validate($data){
+	$jwt=isset($data->jwt) ? $data->jwt : ""; //gets the jwt
+	if($jwt){
+		try {
+			$decoded = JWT::decode($jwt, $key, array('HS256')); //decodes the jwt
+			return true;
+		}catch (Exception $e){
+			http_response_code(401);
+			echo json_encode(array(
+				"response" => "Access Denied, JSON tampered with.",
+				"error" => $e->getMessage()
+			));
+			return false;
+		} 
+	}else{
 		http_response_code(401);
-		echo json_encode(array(
-			"response" => "Failed.",
-			"error" => $e->getMessage()
-		));
-	} 
-}else{
-    http_response_code(401);
-    echo json_encode(array("response" => "Failed."));
+		echo json_encode(array("response" => "Access Denied, empty JSON"));
+		return false;
+	}
+	return false;
 }
+
  
 
 ?>
