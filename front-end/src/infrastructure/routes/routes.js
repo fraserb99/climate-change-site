@@ -8,6 +8,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { HomePage } from '../../slices/Home/HomePage';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import LoginPage from '../../slices/LogIn/LoginPage';
+import CreateAccountPage from '../../slices/LogIn/CreateAccountPage';
 
 const Routes = (props) => {
     console.log(props);
@@ -36,6 +37,7 @@ const Routes = (props) => {
             <Container fluid>
                 <Route exact path='/' component={HomePage} {...props} />
                 <Route path='/login' component={LoginPage} {...props} />
+                <Route path='/createaccount' component={CreateAccountPage} {...props} />
             </Container>
         </div>)
 }
