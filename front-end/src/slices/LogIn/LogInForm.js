@@ -4,10 +4,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { TextRow } from '../../components/Form/TextRow';
 import { validateLogin } from './validators';
 
-const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => (
+const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {console.log(props); return(
     <Formik
         initialValues={{username: '', password: ''}}
-        validate={validateLogin}
+        validate={validateLogin(newAccount || false)}
         onSubmit={handleSubmit}
     >
         <Row className='justify-content-md-center login-form' >
@@ -15,6 +15,7 @@ const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => (
                 <Form>
                     <h2>{newAccount ? 'Create Account' : 'Log In' }</h2>
                     <TextRow name='username' label='Username:' placeholder='Enter username' />
+                    {newAccount && <TextRow name='email' label='Email:' placeholder='Enter email' />}
                     <TextRow type='password' name='password' label='Password:' placeholder='Enter password' />
                     <Row className='justify-content-md-center submit-row' >
                         <Button type='submit' disabled={isSubmitting}>
@@ -33,6 +34,6 @@ const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => (
             </Col>
         </Row>
     </Formik>
-)
+)}
 
 export default LogInForm;

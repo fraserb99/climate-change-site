@@ -6,11 +6,18 @@ import { Switch, Route } from 'react-router-dom';
 import Routes from '../../infrastructure/routes/routes';
 import LoginPage from '../../slices/LogIn/LoginPage';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
+import { getCookie, getJWTUser } from '../../infrastructure/login/sessions';
 
 
 function App(props) {
-  console.log(props);
-  const [user, setUser] = useState();
+  const jwt = getCookie('jwt');
+  console.log(jwt);
+  var loggedInUser = null;
+  if (jwt !== 'null') {
+    console.log(jwt)
+    loggedInUser = getJWTUser(jwt);
+  }
+  const [user, setUser] = useState(loggedInUser);
   return (
       <Switch>
         <UserContext.Provider value={{user, setUser}}>

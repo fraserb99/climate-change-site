@@ -10,37 +10,12 @@ import DropdownItem from 'react-bootstrap/DropdownItem';
 import LoginPage from '../../slices/LogIn/LoginPage';
 import CreateAccountPage from '../../slices/LogIn/CreateAccountPage';
 import { UserContext } from '../contexts/UserContext';
+import { NavBar } from '../../components/NavBar/NavBar';
 
 const Routes = (props) => {
-    const {user, setUser} = useContext(UserContext);
     return (
         <div className='app'>
-            <Navbar
-            variant='dark'
-            sticky='top'
-            bg='dark'
-            expand='lg'
-            >
-                <NavbarBrand>
-                    Climate Change
-                </NavbarBrand>
-                <Nav className="mr-auto">
-                    <Nav.Link href='/' active={props.location.pathname == '/'}><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
-                    <Nav.Link href='/test' active={props.location.pathname.includes('/test')}>Test</Nav.Link>
-                    <NavDropdown title='More'>
-                        <DropdownItem href='/1'>1</DropdownItem>
-                    </NavDropdown>
-                </Nav>
-                <Nav>
-                    {!user ? 
-                        <NavLink href='/login'>Log In</NavLink>
-                        :
-                        <NavDropdown title={user.username}>
-                            <DropdownItem href='/logout'>Log Out</DropdownItem>
-                        </NavDropdown>
-                    }
-                </Nav>
-            </Navbar>
+            <NavBar {...props} />
             <Container fluid>
                 <Route exact path='/' component={HomePage} {...props} />
                 <Route path='/login' component={LoginPage} {...props} />
