@@ -16,7 +16,7 @@ class User{
 
 	function create(){
 	 
-		$query = "INSERT INTO " . $this->table . "
+		$query = "INSERT INTO $this->table
 				SET
 					username = :username,
 					email = :email,
