@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route } from 'react-router';
 import { Row, Nav, Navbar, NavbarBrand, Container, NavDropdown } from 'react-bootstrap';
 import NavLink from 'react-bootstrap/NavLink';
@@ -9,9 +9,10 @@ import { HomePage } from '../../slices/Home/HomePage';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import LoginPage from '../../slices/LogIn/LoginPage';
 import CreateAccountPage from '../../slices/LogIn/CreateAccountPage';
+import { UserContext } from '../contexts/UserContext';
 
 const Routes = (props) => {
-    console.log(props);
+    const {user, setUser} = useContext(UserContext);
     return (
         <div className='app'>
             <Navbar
@@ -31,7 +32,13 @@ const Routes = (props) => {
                     </NavDropdown>
                 </Nav>
                 <Nav>
-                    <NavLink href='/login'>Log In</NavLink>
+                    {!user ? 
+                        <NavLink href='/login'>Log In</NavLink>
+                        :
+                        <NavDropdown title={user.username}>
+                            <DropdownItem href='/logout'>Log Out</DropdownItem>
+                        </NavDropdown>
+                    }
                 </Nav>
             </Navbar>
             <Container fluid>
