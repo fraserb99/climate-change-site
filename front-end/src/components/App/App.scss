@@ -70,7 +70,6 @@ input:focus {
   //background-color: rgba($color: #343a40, $alpha: 0.7);
   padding: 40px 0px;
   padding-left: 10px;
-  display: inline-block;
   position: fixed;
 }
 
@@ -82,12 +81,21 @@ input:focus {
 .home-content {
   padding: none;
   background-color: rgba($color: white, $alpha: 0.7);
+  min-height: 100%;
 }
 
 .home-body {
   padding-top: 45px;
 }
 
-.details-left {
-  //text-align: center;
+.app {
+  min-height: 100%;
+}
+
+.container-fluid {
+  height: auto;
+}
+
+.side-bar {
+  position: fixed;
 }
