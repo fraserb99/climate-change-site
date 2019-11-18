@@ -3,7 +3,7 @@ import { Nav, Navbar, NavbarBrand, Container, NavDropdown } from 'react-bootstra
 import NavLink from 'react-bootstrap/NavLink';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSign, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSign, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
 import Cookies from 'js-cookie';
@@ -29,16 +29,14 @@ export const NavBar = (props) => {
                 </NavbarBrand>
                 <Nav className="mr-auto">
                     <Nav.Link href='/' active={props.location.pathname == '/'}><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
-                    <Nav.Link href='/test' active={props.location.pathname.includes('/test')}>Test</Nav.Link>
-                    <NavDropdown title='More'>
-                        <DropdownItem href='/1'>1</DropdownItem>
-                    </NavDropdown>
+                    <Nav.Link href='/forum' active={props.location.pathname.includes('/forum')}>Forum</Nav.Link>
                 </Nav>
                 <Nav className='login-nav'>
                     {!user ? 
                         <NavLink href='/login'>Log In/Create Account <FontAwesomeIcon icon={faSignInAlt} /></NavLink>
                         :
-                        <NavDropdown title={user.username}>
+                        <NavDropdown title={<span><FontAwesomeIcon icon={faUser} /> {user.username}</span>}>
+                            <DropdownItem href='user/details'>Your Account</DropdownItem>
                             <DropdownItem onClick={() => logout()}>Log Out</DropdownItem>
                         </NavDropdown>
                     }
