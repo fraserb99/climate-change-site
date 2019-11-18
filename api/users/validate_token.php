@@ -13,13 +13,14 @@ use \Firebase\JWT\JWT;
 
 $decoded = null;
  
+$key = "fullMarksForUs";
 
-
-public function validate($data){
+function validate($data){
 	$jwt=isset($data->jwt) ? $data->jwt : ""; //gets the jwt
 	if($jwt){
 		try {
-			$decoded = JWT::decode($jwt, $key, array('HS256')); //decodes the jwt
+			$decoded = JWT::decode($jwt, "fullMarksForUs", array('HS256')); //decodes the jwt
+			var_dump($decoded);
 			return true;
 		}catch (Exception $e){
 			http_response_code(401);

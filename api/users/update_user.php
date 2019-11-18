@@ -20,18 +20,17 @@ include_once 'user_service.php';
 
  
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->connection();
 
 $userService = new UserService($db);
 $user = new User();
 $data = json_decode(file_get_contents("php://input"));
 
-if(validate($data)){
+
 		
 		$user->setUsername($data->username);
 		$user->setEmail($data->email);
-		$user->setPassword($data->password);
-		$user->setID($decoded->data->id);
+		$user->setID($data->id);
 
 		if($userService->update($user)){
 			
@@ -59,10 +58,6 @@ if(validate($data)){
 			http_response_code(401);
 			echo json_encode(array("response" => "Failed, couldn't update user for some reason."));
 		}
-  
-}else{
-	http_response_code(401);
-	echo json_encode(array("response" => "Access Denied."));
-}
+
  
 ?>
