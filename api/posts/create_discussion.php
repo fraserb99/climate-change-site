@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 
 include_once '../config/database.php';
-
+include_once '../config/jwt_validators.php';
 
 include_once 'model/forum_post.php';
 include_once '../config/core.php';
@@ -24,6 +24,9 @@ $db = $database->connection();
 	 
 $data = json_decode(file_get_contents("php://input"));
 
+$token = getBearerToken();
+$jwt = decodeJWT($token);
+validateJWTId($jwt, $data->userid);
 
 $discussion = $data->discussion;
 	 

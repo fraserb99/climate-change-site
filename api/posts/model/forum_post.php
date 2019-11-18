@@ -11,9 +11,20 @@ class ForumPost {
 	private $parentid;
 	private $post;
  
-    
+    public function __construct(){
+			
+		}
 	
 	
+	public static function withRow($row) {
+		$post = new self();
+		$post->setID($row['postid']);
+		$post->setUserID($row['userid']);
+		$post->setPost($row['post']);
+		$post->setParent($row['parentPostID']);
+
+		return $post;
+	}
 	public function getID(){
 		return $this->forumid;
 	}

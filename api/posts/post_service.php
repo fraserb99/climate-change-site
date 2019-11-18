@@ -82,5 +82,29 @@ class PostService {
 	 
 		return false;
 	}
+	public function getById($id) {
+		$query = "SELECT *
+				FROM forum
+				WHERE postid = ?
+				LIMIT 0,1";
+	 
+		
+		$statement = $this->conn->prepare($query);
+	 
+		$statement->bindValue(1, $id);
+	 
+		$statement->execute();
+	 
+		if($statement->rowCount() > 0){
+	 
+			$row = $statement->fetch(PDO::FETCH_ASSOC);
+	 
+			$post = ForumPost::withRow($row);
+	 
+			return $post;
+		}
+		
+		return null;
+	}
 }
 ?>
