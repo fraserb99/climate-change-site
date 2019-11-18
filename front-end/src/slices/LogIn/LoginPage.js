@@ -1,44 +1,49 @@
-import React from 'react';
-import { compose, withHandlers } from 'recompose';
+import React, { useContext, useCallback } from 'react';
+import { compose, withHandlers, withContext } from 'recompose';
 import { Col, Row } from 'react-bootstrap';
 import LogInForm from './LogInForm';
 import './login.scss';
 import { buildUrl } from '../../infrastructure/api/config';
-
-const enhance = compose(
-    withHandlers({
-        handleSubmit: () => (values, { setSubmitting }) => {
-            try {
-                const response = fetch(buildUrl('models/login.php'), {
-                    method: 'POST',
-                    headers: {'Content-Type':'application/json'},
-                    body: JSON.stringify({
-                    "username": values.username,
-                    'password': values.password
-                    })
-                });
-
-                if (!response.ok) {
-                    console.log(response);
-                    throw new Error('Error');
-                }
+import { UserContext } from '../../infrastructure/contexts/UserContext';
+import Cookies from 'js-cookie';
+import { getJWTUser } from '../../infrastructure/login/sessions';
+import { logIn } from './actions';
+import toastr from 'toastr';
 
 
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setSubmitting(false);
+const LogInPage = props => {
+    console.log(props);
+    const {user, setUser} = useContext(UserContext);
+    const handleSubmit = useCallback(async (values, { setSubmitting, setFieldError }) => {
+        try {
+            setSubmitting(true);
+            const response = await logIn(values);
+
+            if (!response.ok) {
+                throw new Error('Error');
             }
-        }
-    })
-)
 
-const LogInPage = props => (
+            const body = await response.json();
+            const jwt = body.jwt;
+            const newUser = await getJWTUser(jwt);
+
+            setUser(newUser);
+            Cookies.set('jwt', jwt);
+            props.history.push('/');
+        } catch (error) {
+            console.log(error);
+            setFieldError('password', 'Incorrect username or password');
+        } finally {
+            setSubmitting(false);
+        }
+    });
+
+    return (
     <div className='login-form'>
         <Col lg={{ span: 4, offset: 4 }} md={6} className='login-container'>
-            <LogInForm {...props} />
+            <LogInForm {...props} handleSubmit={handleSubmit} />
         </Col>
-    </div>
-)
+    </div>)
+}
 
-export default enhance(LogInPage);
+export default LogInPage;

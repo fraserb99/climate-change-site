@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import { Row } from 'react-bootstrap';
 import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import Routes from '../../infrastructure/routes/routes';
 import LoginPage from '../../slices/LogIn/LoginPage';
+import { UserContext } from '../../infrastructure/contexts/UserContext';
+import { getCookie, getJWTUser } from '../../infrastructure/login/sessions';
+import {ToastContainer} from 'react-toastr';
 
 
 function App(props) {
-  console.log(props);
+  const jwt = getCookie('jwt');
+  console.log(jwt);
+  var loggedInUser = null;
+  if (jwt !== 'null') {
+    console.log(jwt)
+    loggedInUser = getJWTUser(jwt);
+  }
+  const [user, setUser] = useState(loggedInUser);
+
+  let toastr;
   return (
       <Switch>
-        <Route path='/' component={Routes} />
-        {/* <Route path='/login' component={LoginPage} /> */}
+        <UserContext.Provider value={{user, setUser}}>
+          <Route path='/' component={Routes} />
+        </UserContext.Provider>
       </Switch>
   );
 }
