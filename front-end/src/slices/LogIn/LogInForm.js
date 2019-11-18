@@ -10,12 +10,12 @@ const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {conso
         validate={newAccount ? validateNewAccount : validateLogin}
         onSubmit={handleSubmit}
     >
-        <Row className='justify-content-md-center login-form' >
+        {({ isSubmitting }) => <Row className='justify-content-md-center login-form' >
             <Col xl={8} lg={12} className='login-window'>
                 <Form>
                     <h2>{newAccount ? 'Create Account' : 'Log In' }</h2>
                     <TextRow name='username' label='Username:' placeholder='Enter username' />
-                    {newAccount && <TextRow name='email' label='Email:' placeholder='Enter email' required />}
+                    {newAccount && <TextRow name='email' label='Email:' placeholder='Enter email' required defaultValue='' />}
                     <TextRow type='password' name='password' label='Password:' placeholder='Enter password' />
                     <Row className='justify-content-md-center submit-row' >
                         <Button type='submit' disabled={isSubmitting}>
@@ -32,7 +32,7 @@ const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {conso
                         {' '}| <a href='forgotpassword'>Forgotten Password?</a>
                     </small>
             </Col>
-        </Row>
+        </Row>}
     </Formik>
 )}
 

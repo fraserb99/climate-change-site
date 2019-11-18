@@ -5,21 +5,26 @@ import LogInForm from './LogInForm';
 import './login.scss';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
 import { createAccount } from './actions';
+import { getJWTUser } from '../../infrastructure/login/sessions';
 
 const LogInPage = props => {
     const {user, setUser} = useContext(UserContext);
 
-    const handleSubmit = useCallback((values, { setSubmitting, setFieldError }) => {
+    const handleSubmit = useCallback(async (values, { setSubmitting, setFieldError }) => {
         createAccount(values)
-            .then(res => {
+            .then(async (res) => {
+                const body = await res.json();
                 if (!res.ok) {
-                    throw new Error();
+                    throw new Error(body.response);
                 }
 
-                console.log('Success');
-            }).catch((e) => {
+                const newUser = await getJWTUser(body.jwt);
+                setUser(newUser);
+                props.history.push('/');
+            })
+            .catch((e) => {
                 console.log(e);
-                setFieldError('password', 'Failed to create account');
+                setFieldError('password', e.message);
             });
     });
 

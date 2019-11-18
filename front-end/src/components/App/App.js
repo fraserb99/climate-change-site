@@ -11,7 +11,7 @@ import {ToastContainer} from 'react-toastr';
 
 
 function App(props) {
-  const jwt = getCookie('jwt');
+  let jwt = getCookie('jwt');
   console.log(jwt);
   var loggedInUser = null;
   if (jwt !== 'null') {

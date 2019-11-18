@@ -3,7 +3,7 @@ import { Nav, Navbar, NavbarBrand, Container, NavDropdown } from 'react-bootstra
 import NavLink from 'react-bootstrap/NavLink';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSign, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
 import Cookies from 'js-cookie';
@@ -36,7 +36,7 @@ export const NavBar = (props) => {
                 </Nav>
                 <Nav className='login-nav'>
                     {!user ? 
-                        <NavLink href='/login'>Log In</NavLink>
+                        <NavLink href='/login'>Log In/Create Account <FontAwesomeIcon icon={faSignInAlt} /></NavLink>
                         :
                         <NavDropdown title={user.username}>
                             <DropdownItem onClick={() => logout()}>Log Out</DropdownItem>

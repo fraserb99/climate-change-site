@@ -24,10 +24,10 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.container-fluid {
-    margin: 0;
-    height: 92%;
-}
+// .container-fluid {
+//     margin: 0;
+//     height: 100%;
+// }
 
 .login-window {
     padding: 20px 5px;
@@ -36,8 +36,8 @@ body {
     background-color: lightgrey;
 }
 
-.container-fluid {
-    background-image: url('../../assets/login-background.jpg');
-    background-size: 100%;
-    background-attachment: fixed;
-}
+// .container-fluid {
+//     background-image: url('../../assets/login-background.jpg');
+//     background-size: 100%;
+//     background-attachment: fixed;
+// }
