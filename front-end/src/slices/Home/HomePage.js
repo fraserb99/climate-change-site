@@ -1,8 +1,10 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 export const HomePage = () => (
-    <div>
-        <h1>Home Page</h1>
-    </div>
+    <Row className='page-header-row'>
+        <Col lg={3} sm={12} className='page-header'>
+            <h1 style={{verticalAlign: 'middle'}}>Home Page</h1>
+        </Col>
+    </Row>
 )

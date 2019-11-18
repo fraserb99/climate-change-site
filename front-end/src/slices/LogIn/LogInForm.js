@@ -7,7 +7,7 @@ import { validateLogin } from './validators';
 const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {console.log(props); return(
     <Formik
         initialValues={{username: '', password: ''}}
-        validate={validateLogin(newAccount || false)}
+        validate={validateLogin}
         onSubmit={handleSubmit}
     >
         <Row className='justify-content-md-center login-form' >
@@ -15,7 +15,7 @@ const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {conso
                 <Form>
                     <h2>{newAccount ? 'Create Account' : 'Log In' }</h2>
                     <TextRow name='username' label='Username:' placeholder='Enter username' />
-                    {newAccount && <TextRow name='email' label='Email:' placeholder='Enter email' />}
+                    {newAccount && <TextRow name='email' label='Email:' placeholder='Enter email' required />}
                     <TextRow type='password' name='password' label='Password:' placeholder='Enter password' />
                     <Row className='justify-content-md-center submit-row' >
                         <Button type='submit' disabled={isSubmitting}>

@@ -28,6 +28,7 @@ const LogInPage = props => {
 
             setUser(newUser);
             Cookies.set('jwt', jwt);
+            props.history.push('/');
         } catch (error) {
             setFieldError('password', 'Incorrect username or password');
         } finally {

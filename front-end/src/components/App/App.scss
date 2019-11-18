@@ -63,3 +63,14 @@ input:focus {
 .login-nav {
   padding-right: 100px;
 }
+
+.page-header {
+  color: white;
+  background-color: rgba($color: #343a40, $alpha: 0.7);
+  padding: 60px 0px;
+}
+
+.page-header-row {
+  height: 10%;
+  align-items: center;
+}

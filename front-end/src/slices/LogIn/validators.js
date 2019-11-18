@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const validateLogin = (values) => (newAccount) => {
+export const validateLogin = (values) => {
     const errors = {};
 
     if (!values.username) {
@@ -9,10 +9,6 @@ export const validateLogin = (values) => (newAccount) => {
 
     if (!values.password) {
         errors.password = 'Please enter your password';
-    }
-
-    if (newAccount && !values.email) {
-        errors.email = 'Please enter an email';
     }
 
     return errors;
