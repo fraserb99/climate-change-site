@@ -8,6 +8,16 @@ class User{
  
 	public function __construct(){
 	}
+
+	public static function withRow($row) {
+		$user = new self();
+		$user->setID($row['id']);
+		$user->setUsername($row['username']);
+		$user->setEmail($row['email']);
+		$user->setPassword($row['password']);
+
+		return $user;
+	}
 	
 	public function getID(){
 	   return $this->id;

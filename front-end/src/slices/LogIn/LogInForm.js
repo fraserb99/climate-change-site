@@ -3,6 +3,8 @@ import { Col, Button, Row } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { TextRow } from '../../components/Form/TextRow';
 import { validateLogin, validateNewAccount } from './validators';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {console.log(props); return(
     <Formik
@@ -19,7 +21,7 @@ const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {conso
                     <TextRow type='password' name='password' label='Password:' placeholder='Enter password' />
                     <Row className='justify-content-md-center submit-row' >
                         <Button type='submit' disabled={isSubmitting}>
-                            {newAccount ? 'Create Account' : 'Log In'}
+                            {newAccount ? 'Create Account' : 'Log In'} {isSubmitting && <FontAwesomeIcon icon={faSpinner} className='fa-spin' />}
                         </Button>
                     </Row>
                 </Form>
