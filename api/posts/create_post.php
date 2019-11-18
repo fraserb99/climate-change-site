@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 
 include_once '../config/database.php';
-
+include_once '../config/jwt_validators.php';
 
 include_once 'post_service.php';
 include_once 'model/forum_post.php';
@@ -25,39 +25,41 @@ $post = new ForumPost();
 	 
 $data = json_decode(file_get_contents("php://input"));
 
-
+$token = getBearerToken();
+$jwt = decodeJWT($token);
+validateJWTId($jwt, $data->userid);
 	
 	 
-	$post->setUserID($data->userid);
-	$post->setDiscID($data->discussionid);
-	$post->setPost($data->post);
-	$post->setParent($data->parentid);
-	 
+$post->setUserID($data->userid);
+$post->setDiscID($data->discussionid);
+$post->setPost($data->post);
+$post->setParent($data->parentid);
+ 
 
-	if(!empty($post->getUserID())){
-		if(!empty($post->getPost())){
-			if($post->getParent() >= 0){
-				if(!empty($post->getDiscID())){
-					if($post_service->create($post)){
-						http_response_code(200);
-						echo json_encode(array("response" => "Success"));
-					}
-				}else{
-					http_response_code(400);
-					echo json_encode(array("response" => "Empty Discussion ID Field"));
+if(!empty($post->getUserID())){
+	if(!empty($post->getPost())){
+		if($post->getParent() >= 0){
+			if(!empty($post->getDiscID())){
+				if($post_service->create($post)){
+					http_response_code(200);
+					echo json_encode(array("response" => "Success"));
 				}
 			}else{
 				http_response_code(400);
-				echo json_encode(array("response" => "Empty Parent ID Field"));
+				echo json_encode(array("response" => "Empty Discussion ID Field"));
 			}
 		}else{
 			http_response_code(400);
-			echo json_encode(array("response" => "Empty Post Field"));
-	}
+			echo json_encode(array("response" => "Empty Parent ID Field"));
+		}
 	}else{
 		http_response_code(400);
-		echo json_encode(array("response" => "Empty User ID Field"));
-	}
+		echo json_encode(array("response" => "Empty Post Field"));
+}
+}else{
+	http_response_code(400);
+	echo json_encode(array("response" => "Empty User ID Field"));
+}
 
 
 ?>

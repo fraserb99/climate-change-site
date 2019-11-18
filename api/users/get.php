@@ -26,7 +26,7 @@ $userService = new UserService($db);
 $id = strip_tags(isset($_GET['id']) ? $_GET['id'] : null);
 
 if ($id != null) {
-    $token = getBearerToken($id);
+    $token = getBearerToken();
     $jwt = decodeJWT($token);
     validateJWTId($jwt, $id);
     $user = $userService->getById($id);
