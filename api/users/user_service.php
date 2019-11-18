@@ -72,7 +72,6 @@ class UserService{
 	
 	public function update($user){
  
-		$password_set=!empty($user->getPassword()) ? ", password = :password" : "";
 		$username_set=!empty($user->getUsername()) ? ", username = :username" : "";
 		$email_set=!empty($user->getEmail()) ? ", email = :email" : "";
 	 
@@ -80,22 +79,23 @@ class UserService{
 				SET
 					id = :id
 					{$username_set}
-					{$password_set}
-					{$password_set}
+					{$email_set}
+					
 				WHERE id = :id";
 	 
 		$statement = $this->conn->prepare($query);
-
+	/*
 		if(!empty($user->getPassword())){
 			$user->setPassword(htmlspecialchars(strip_tags($user->getPassword())));
 			$password_hash = password_hash($user->getPassword(), PASSWORD_BCRYPT);
 			$statement->bindValue(':password', $password_hash);
 		}
-		if(!empty($user->username)){
+		*/
+		if(!empty($user->getUsername())){
 			$user->setUsername(htmlspecialchars(strip_tags($user->getUsername())));
 			$statement->bindValue(':username', $user->getUsername());
 		}
-		if(!empty($user->email)){
+		if(!empty($user->getEmail())){
 			$user->setEmail(htmlspecialchars(strip_tags($user->getEmail())));
 			$statement->bindValue(':email', $user->getEmail());
 		}
