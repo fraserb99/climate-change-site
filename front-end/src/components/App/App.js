@@ -7,6 +7,7 @@ import Routes from '../../infrastructure/routes/routes';
 import LoginPage from '../../slices/LogIn/LoginPage';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
 import { getCookie, getJWTUser } from '../../infrastructure/login/sessions';
+import {ToastContainer} from 'react-toastr';
 
 
 function App(props) {
@@ -18,6 +19,8 @@ function App(props) {
     loggedInUser = getJWTUser(jwt);
   }
   const [user, setUser] = useState(loggedInUser);
+
+  let toastr;
   return (
       <Switch>
         <UserContext.Provider value={{user, setUser}}>

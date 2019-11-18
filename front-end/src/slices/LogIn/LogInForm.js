@@ -2,12 +2,12 @@ import React from 'react';
 import { Col, Button, Row } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { TextRow } from '../../components/Form/TextRow';
-import { validateLogin } from './validators';
+import { validateLogin, validateNewAccount } from './validators';
 
 const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {console.log(props); return(
     <Formik
         initialValues={{username: '', password: ''}}
-        validate={validateLogin}
+        validate={newAccount ? validateNewAccount : validateLogin}
         onSubmit={handleSubmit}
     >
         <Row className='justify-content-md-center login-form' >

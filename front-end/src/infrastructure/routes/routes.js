@@ -12,14 +12,16 @@ import CreateAccountPage from '../../slices/LogIn/CreateAccountPage';
 import { UserContext } from '../contexts/UserContext';
 import { NavBar } from '../../components/NavBar/NavBar';
 
+
 const Routes = (props) => {
+    console.log(props);
     return (
         <div className='app'>
             <NavBar {...props} />
             <Container fluid>
                 <Route exact path='/' component={HomePage} {...props} />
-                <Route path='/login' component={LoginPage} {...props} />
-                <Route path='/createaccount' component={CreateAccountPage} {...props} />
+                <Route path='/login' render={(props) => <LoginPage {...props} />} />
+                <Route path='/createaccount' component={(props) => <CreateAccountPage {...props} />} />
             </Container>
         </div>)
 }

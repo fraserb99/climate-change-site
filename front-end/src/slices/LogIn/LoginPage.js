@@ -8,11 +8,12 @@ import { UserContext } from '../../infrastructure/contexts/UserContext';
 import Cookies from 'js-cookie';
 import { getJWTUser } from '../../infrastructure/login/sessions';
 import { logIn } from './actions';
+import toastr from 'toastr';
+
 
 const LogInPage = props => {
-    
+    console.log(props);
     const {user, setUser} = useContext(UserContext);
-    
     const handleSubmit = useCallback(async (values, { setSubmitting, setFieldError }) => {
         try {
             setSubmitting(true);
@@ -30,6 +31,7 @@ const LogInPage = props => {
             Cookies.set('jwt', jwt);
             props.history.push('/');
         } catch (error) {
+            console.log(error);
             setFieldError('password', 'Incorrect username or password');
         } finally {
             setSubmitting(false);
