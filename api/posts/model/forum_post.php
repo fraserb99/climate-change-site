@@ -10,7 +10,8 @@ class ForumPost {
 	private $discussionName;
 	private $parentid;
 	private $post;
- 
+	private $likes;
+	
     public function __construct(){
 			
 		}
@@ -26,7 +27,7 @@ class ForumPost {
 		return $post;
 	}
 	public function getID(){
-		return $this->forumid;
+		return $this->postid;
 	}
 	public function getUserID(){
 		return $this->userid;
@@ -44,7 +45,7 @@ class ForumPost {
 		return $this->post;
 	}
 	public function setID($id){
-		$this->forumid = $id;
+		$this->postid = $id;
 	}
 	public function setUserID($id){
 		$this->userid = $id;
@@ -60,6 +61,12 @@ class ForumPost {
 	}
 	public function setParent($id){
 		$this->parentid = $id;
+	}
+	public function setLikes($int){
+			$this->likes = $int;
+	}
+	public function getLikes(){
+			return $this->likes;
 	}
 }
 ?>

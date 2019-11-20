@@ -73,8 +73,8 @@ class PostService {
 			$statement->bindValue(':post', $post->post);
 		}
 		
-		$statement->bindValue(':postid', $post->postid);
-		$statement->bindValue(':userid', $post->userid);
+		$statement->bindValue(':postid', $post->getPostID());
+		$statement->bindValue(':userid', $post->getUserID());
 		
 		if($statement->execute()){
 			return true;
@@ -105,6 +105,28 @@ class PostService {
 		}
 		
 		return null;
+	}
+	
+	public function getLikes($post){
+		$query = "SELECT *
+				FROM likes				
+				WHERE 
+					postid = :postid";
+				
+		$statement = $this->conn->prepare($query);
+		
+		$statement->bindValue(':postid', $post->getID());
+		
+		if (!$statement->execute()) {
+			print_r($statement->errorInfo());
+			return -1; 
+		}else{
+			$count = 0;
+			while($row = $statement->fetch()) {
+				$count++;
+			}
+			return $count;
+		}		
 	}
 }
 ?>
