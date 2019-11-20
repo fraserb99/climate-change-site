@@ -42,7 +42,7 @@ if(!empty($post->getUserID())){
 			if(!empty($post->getDiscID())){
 				if($post_service->create($post)){
 					http_response_code(200);
-					echo json_encode(array("response" => "Success"));
+					echo json_encode(array("post" => $post->getPost()));
 				}
 			}else{
 				http_response_code(400);
