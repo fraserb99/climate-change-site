@@ -4,8 +4,8 @@ class ForumPost {
 	
 
  
-    private $postid;
-    private $userid;
+    private $postId;
+    private $userId;
     private $discussionid;
 	private $discussionName;
 	private $parentid;
@@ -19,18 +19,18 @@ class ForumPost {
 	
 	public static function withRow($row) {
 		$post = new self();
-		$post->setID($row['postid']);
-		$post->setUserID($row['userid']);
+		$post->setID($row['postId']);
+		$post->setuserId($row['userId']);
 		$post->setPost($row['post']);
-		$post->setParent($row['parentPostID']);
+		$post->setParent($row['parentpostId']);
 
 		return $post;
 	}
 	public function getID(){
-		return $this->postid;
+		return $this->postId;
 	}
-	public function getUserID(){
-		return $this->userid;
+	public function getuserId(){
+		return $this->userId;
 	}
 	public function getDiscussion(){
 		return $this->discussionName;
@@ -45,10 +45,10 @@ class ForumPost {
 		return $this->post;
 	}
 	public function setID($id){
-		$this->postid = $id;
+		$this->postId = $id;
 	}
-	public function setUserID($id){
-		$this->userid = $id;
+	public function setuserId($id){
+		$this->userId = $id;
 	}
 	public function setDiscussion($disc){
 		$this->discussionName = $disc;

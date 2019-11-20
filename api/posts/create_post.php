@@ -27,16 +27,16 @@ $data = json_decode(file_get_contents("php://input"));
 
 $token = getBearerToken();
 $jwt = decodeJWT($token);
-validateJWTId($jwt, $data->userid);
+validateJWTId($jwt, $data->userId);
 	
 	 
-$post->setUserID($data->userid);
+$post->setuserId($data->userId);
 $post->setDiscID($data->discussionid);
 $post->setPost($data->post);
 $post->setParent($data->parentid);
  
 
-if(!empty($post->getUserID())){
+if(!empty($post->getuserId())){
 	if(!empty($post->getPost())){
 		if($post->getParent() >= 0){
 			if(!empty($post->getDiscID())){

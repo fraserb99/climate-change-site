@@ -29,10 +29,10 @@ $data = json_decode(file_get_contents("php://input"));
 
 $token = getBearerToken();
 $jwt = decodeJWT($token);
-$userid = htmlspecialchars(strip_tags($jwt->data->id));
-validateJWTId($jwt, $userid);
-$postid = isset($data->postid) ? htmlspecialchars(strip_tags($data->postid)) : "";
-if(empty($postid)){
+$userId = htmlspecialchars(strip_tags($jwt->data->id));
+validateJWTId($jwt, $userId);
+$postId = isset($data->postId) ? htmlspecialchars(strip_tags($data->postId)) : "";
+if(empty($postId)){
 	http_response_code(401);
 	echo json_encode(array("response" => "no post id given"));
 	exit(0);
@@ -40,25 +40,25 @@ if(empty($postid)){
 
 $query = "SELECT *
 				FROM likes
-				WHERE userid = :userid AND postid = :postid";
+				WHERE userId = :userId AND postId = :postId";
 	 
 		
 $statement = $db->prepare($query);
 
-$statement->bindValue(":userid", $userid);
-$statement->bindValue(":postid", $postid);
+$statement->bindValue(":userId", $userId);
+$statement->bindValue(":postId", $postId);
 
 if($statement->execute()){
 	if($statement->rowCount() > 0){
 		$query = "DELETE FROM likes
 				WHERE
-					userid = :userid AND
-					postid = :postid";
+					userId = :userId AND
+					postId = :postId";
 
 		$statement = $db->prepare($query);
 
-		$statement->bindValue(':userid', $userid);
-		$statement->bindValue(':postid', $postid);
+		$statement->bindValue(':userId', $userId);
+		$statement->bindValue(':postId', $postId);
 		
 		if($statement->execute()){
 			http_response_code(200);
