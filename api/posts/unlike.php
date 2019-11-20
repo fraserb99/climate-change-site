@@ -31,7 +31,12 @@ $token = getBearerToken();
 $jwt = decodeJWT($token);
 $userid = htmlspecialchars(strip_tags($jwt->data->id));
 validateJWTId($jwt, $userid);
-$postid = htmlspecialchars(strip_tags($data->postid));
+$postid = isset($data->postid) ? htmlspecialchars(strip_tags($data->postid)) : "";
+if(empty($postid)){
+	http_response_code(401);
+	echo json_encode(array("response" => "no post id given"));
+	exit(0);
+}
 
 $query = "SELECT *
 				FROM likes
@@ -45,10 +50,6 @@ $statement->bindValue(":postid", $postid);
 
 if($statement->execute()){
 	if($statement->rowCount() > 0){
-		http_response_code(401);
-		echo json_encode(array("response" => "Already liked"));
-		exit(0);
-	}else{
 		$query = "DELETE FROM likes
 				WHERE
 					userid = :userid AND
@@ -66,6 +67,10 @@ if($statement->execute()){
 			http_response_code(401);
 			echo json_encode(array("response" => "Query failed"));
 		}
+	}else{
+		http_response_code(401);
+		echo json_encode(array("response" => "Already unliked"));
+		exit(0);
 	}
 }else{
 	http_response_code(401);
