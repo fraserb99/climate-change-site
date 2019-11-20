@@ -32,7 +32,7 @@ validateJWTId($jwt, $data->userid);
 		
 $user->setUsername($data->username);
 $user->setEmail($data->email);
-$user->setID($data->id);
+$user->setID($data->userid);
 
 if($userService->update($user)){
 	

@@ -8,6 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once 'model/forum_post.php';
 include_once 'post_service.php';
+include_once '../users/user_service.php';
 
 include_once '../config/core.php';
 include_once '../library/php-jwt-master/src/BeforeValidException.php';
@@ -22,17 +23,19 @@ $database = new Database();
 $db = $database->connection();
 
 $postService = new PostService($db);
+$userService = new UserService($db);
 
-$id = strip_tags(isset($_GET['discussionid']) ? $_GET['discussionid'] : null);
+$id = strip_tags(isset($_GET['id']) ? $_GET['id'] : null);
 
 if ($id != null) {
 	
     $query = "SELECT *
 				FROM forum				
-				WHERE discussionid = ?
+				WHERE discussion = ?
 				ORDER BY time";
 	
 	$statement = $db->prepare($query);
+	$statement->bindValue(1, $id);
 	
 	if (!$statement->execute()) {
 		print_r($statement->errorInfo());
@@ -48,7 +51,9 @@ if ($id != null) {
 				echo json_encode(array("response" => "Query failed"));
 				exit(0);
 			}
-			array_push($data, array("postid" => $row['postid'],  "userid" => $row['userid']), "parent" => $row['parentPostID'], "post" => $row['post'], "likes" => $likes, "time" => $row['time']);
+			$username = $userService->getById($row['userid'])->getUsername();
+			
+			array_push($data, array("postid" => $row['postid'],"userid" => $row['userid'] ,"username" => $username, "parent" => $row['parentPostID'], "post" => $row['post'], "likes" => $likes, "time" => $row['time']));
 		}
 		http_response_code(200);
 		echo json_encode($data);
@@ -58,21 +63,5 @@ if ($id != null) {
 }
 
 
-$user = $userService->getById($id);
-    if ($user != null) {
-        http_response_code(200);
-        echo json_encode(array(
-            'user' => array(
-                'id' => $user->getId(),
-                'username' => $user->getUsername(),
-                'email' => $user->getEmail()
-            )
-        ));
-    } else {
-        http_response_code(404);
-        echo json_encode(array(
-            'response' => 'User not found'
-        ));
-    }
 	
 ?>

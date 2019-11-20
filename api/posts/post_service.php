@@ -31,10 +31,6 @@ class PostService {
 		$statement->bindValue(':discussionid', $post->getDiscID());
 		$statement->bindValue(':post', $post->getPost());
 		$statement->bindValue(':parentid', $post->getParent());
-		var_dump($post->getUserID());
-		var_dump($post->getDiscID());
-		var_dump($post->getPost());
-		var_dump($post->getParent());
 		if($statement->execute()){
 			return true;
 		}
@@ -43,16 +39,6 @@ class PostService {
 		return false;
 	}
 	
-	/*
-	$query = "INSERT INTO discussions SET name = :discussionName";
-			$statement = $post->conn->prepare($query);
-			$statement->bindValue(':discussionName', $post->discussionName);
-			if($statement->execute()) {
-				return true;	
-			}else{
-				return false;
-			}
-	*/
 	
 	public function edit($post){
  
