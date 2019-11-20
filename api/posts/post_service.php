@@ -12,22 +12,22 @@ class PostService {
 	public function create($post){
 		$query = "INSERT INTO forum
 				SET
-					userid = :userid,
+					userId = :userId,
 					discussion = :discussionid,
 					post = :post,
-					parentPostID = :parentid"
+					parentpostId = :parentid"
 					;
 	 
 	 
 		$statement = $this->conn->prepare($query);
 		
-		$post->setUserID(htmlspecialchars(strip_tags($post->getUserID())));
+		$post->setuserId(htmlspecialchars(strip_tags($post->getuserId())));
 		$post->setDiscID(htmlspecialchars(strip_tags($post->getDiscID())));
 		$post->setPost(htmlspecialchars(strip_tags($post->getPost())));
 		$post->setParent(htmlspecialchars(strip_tags($post->getParent())));
 	 
 
-		$statement->bindValue(':userid', $post->getUserID());
+		$statement->bindValue(':userId', $post->getuserId());
 		$statement->bindValue(':discussionid', $post->getDiscID());
 		$statement->bindValue(':post', $post->getPost());
 		$statement->bindValue(':parentid', $post->getParent());
@@ -47,9 +47,9 @@ class PostService {
 	 
 		$query = "UPDATE " . $post->table . "
 				SET
-					postid = :postid
+					postId = :postId
 					{$post_set}
-				WHERE postid = :postid AND userid = :userid";
+				WHERE postId = :postId AND userId = :userId";
 	 
 		$statement = $post->conn->prepare($query);
 
@@ -59,8 +59,8 @@ class PostService {
 			$statement->bindValue(':post', $post->post);
 		}
 		
-		$statement->bindValue(':postid', $post->getPostID());
-		$statement->bindValue(':userid', $post->getUserID());
+		$statement->bindValue(':postId', $post->getpostId());
+		$statement->bindValue(':userId', $post->getuserId());
 		
 		if($statement->execute()){
 			return true;
@@ -71,7 +71,7 @@ class PostService {
 	public function getById($id) {
 		$query = "SELECT *
 				FROM forum
-				WHERE postid = ?
+				WHERE postId = ?
 				LIMIT 0,1";
 	 
 		
@@ -97,11 +97,11 @@ class PostService {
 		$query = "SELECT *
 				FROM likes				
 				WHERE 
-					postid = :postid";
+					postId = :postId";
 				
 		$statement = $this->conn->prepare($query);
 		
-		$statement->bindValue(':postid', $post->getID());
+		$statement->bindValue(':postId', $post->getID());
 		
 		if (!$statement->execute()) {
 			print_r($statement->errorInfo());

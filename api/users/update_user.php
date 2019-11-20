@@ -28,11 +28,11 @@ $data = json_decode(file_get_contents("php://input"));
 
 $token = getBearerToken();
 $jwt = decodeJWT($token);
-validateJWTId($jwt, $data->userid);
+validateJWTId($jwt, $data->userId);
 		
 $user->setUsername($data->username);
 $user->setEmail($data->email);
-$user->setID($data->userid);
+$user->setID($data->userId);
 
 if($userService->update($user)){
 	

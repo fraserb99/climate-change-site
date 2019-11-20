@@ -44,16 +44,16 @@ if ($id != null) {
 		$data = array();
 		while($row = $statement->fetch()) {
 			$post = new ForumPost();
-			$post->setID($row['postid']);
+			$post->setID($row['postId']);
 			$likes = $postService->getLikes($post);
 			if($likes === -1) {
 				http_response_code(401);
 				echo json_encode(array("response" => "Query failed"));
 				exit(0);
 			}
-			$username = $userService->getById($row['userid'])->getUsername();
+			$username = $userService->getById($row['userId'])->getUsername();
 			
-			array_push($data, array("postid" => $row['postid'],"userid" => $row['userid'] ,"username" => $username, "parent" => $row['parentPostID'], "post" => $row['post'], "likes" => $likes, "time" => $row['time']));
+			array_push($data, array("postId" => $row['postId'],"userId" => $row['userId'] ,"username" => $username, "parent" => $row['parentpostId'], "post" => $row['post'], "likes" => $likes, "time" => $row['time']));
 		}
 		http_response_code(200);
 		echo json_encode($data);

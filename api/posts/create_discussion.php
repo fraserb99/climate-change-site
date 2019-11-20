@@ -26,7 +26,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 $token = getBearerToken();
 $jwt = decodeJWT($token);
-validateJWTId($jwt, $data->userid);
+validateJWTId($jwt, $data->userId);
 
 $discussion = $data->discussion;
 	 
