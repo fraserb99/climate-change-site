@@ -5,11 +5,17 @@ import './input.scss';
 
 export const TextRow = (props) => (
     <Row noGutters className='input-group'>
-        <Col lg={3} md={4} >
-            {props.label}
-        </Col>
+        {props.label && 
+            <Col lg={3} md={4} >
+                {props.label}
+            </Col>
+        }
         <Col lg={8} md={7} className='input-col'>
-            <Field type={props.type || 'text'} name={props.name} style={{marginRight: 'none'}} />
+            <Field 
+                type={props.type || 'text'} 
+                name={props.name} 
+                {...props}
+            />
             <ErrorMessage name={props.name} component='small' className='invalid-input' />
         </Col>
     </Row>
