@@ -142,7 +142,7 @@ input:focus {
       }
     }
   }
-  &:last-child {
+  .post-row:last-child {
     padding-bottom: 0;
   }
 }
@@ -171,7 +171,7 @@ input:focus {
 }
 
 .pull-left {
-  align-self: flex-start;
+  float: left;
 }
 
 textarea {
@@ -194,3 +194,10 @@ textarea {
   margin: 0px 5px !important;
 }
 
+.user-details {
+  padding-bottom: 25px;
+}
+
+.details-btn {
+  margin-left: 10px;
+}

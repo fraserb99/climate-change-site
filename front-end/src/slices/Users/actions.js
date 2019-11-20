@@ -9,3 +9,13 @@ export const getUser = (id) => {
             'Authorization' : `Bearer ${getCookie('jwt')}`},
     });
 }
+
+export const updateUser = (user) => {
+    return fetch(buildUrl(`users/update_user.php`), {
+        method: 'POST',
+        mode: 'cors',
+        headers: {'Content-Type':'application/json; charset=UTF-8',
+            'Authorization' : `Bearer ${getCookie('jwt')}`},
+        body: JSON.stringify(user)
+    });
+}
