@@ -13,7 +13,7 @@ class PostService {
 		$query = "INSERT INTO forum
 				SET
 					userId = :userId,
-					discussion = :discussionid,
+					discussion = :discussionId,
 					post = :post,
 					parentpostId = :parentid"
 					;
@@ -28,7 +28,7 @@ class PostService {
 	 
 
 		$statement->bindValue(':userId', $post->getuserId());
-		$statement->bindValue(':discussionid', $post->getDiscID());
+		$statement->bindValue(':discussionId', $post->getDiscID());
 		$statement->bindValue(':post', $post->getPost());
 		$statement->bindValue(':parentid', $post->getParent());
 		if($statement->execute()){

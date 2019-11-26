@@ -6,7 +6,7 @@ class ForumPost {
  
     private $postId;
     private $userId;
-    private $discussionid;
+    private $discussionId;
 	private $discussionName;
 	private $parentid;
 	private $post;
@@ -36,10 +36,10 @@ class ForumPost {
 		return $this->discussionName;
 	}
 	public function setDiscID($id){
-		$this->discussionid = $id;
+		$this->discussionId = $id;
 	}
 	public function getDiscID(){
-		return $this->discussionid;
+		return $this->discussionId;
 	}
 	public function getPost(){
 		return $this->post;
