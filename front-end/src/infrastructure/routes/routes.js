@@ -11,6 +11,9 @@ import LoginPage from '../../slices/LogIn/LoginPage';
 import CreateAccountPage from '../../slices/LogIn/CreateAccountPage';
 import { UserContext } from '../contexts/UserContext';
 import { NavBar } from '../../components/NavBar/NavBar';
+import { UserDetailsPage } from '../../slices/Users/Details';
+import { ForumPage } from '../../slices/Forum/ForumPage';
+import { DiscussionPage } from '../../slices/Forum/DiscussionPage';
 
 
 const Routes = (props) => {
@@ -22,6 +25,10 @@ const Routes = (props) => {
                 <Route exact path='/' component={HomePage} {...props} />
                 <Route path='/login' render={(props) => <LoginPage {...props} />} />
                 <Route path='/createaccount' component={(props) => <CreateAccountPage {...props} />} />
+                <Route path='/user/details' component={UserDetailsPage} />
+
+                <Route exact path='/discussions' component={DiscussionPage} />
+                <Route path='/discussions/:discussionId' component={ForumPage} />
             </Container>
         </div>)
 }

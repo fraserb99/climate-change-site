@@ -70,7 +70,6 @@ input:focus {
   //background-color: rgba($color: #343a40, $alpha: 0.7);
   padding: 40px 0px;
   padding-left: 10px;
-  display: inline-block;
   position: fixed;
 }
 
@@ -82,12 +81,123 @@ input:focus {
 .home-content {
   padding: none;
   background-color: rgba($color: white, $alpha: 0.7);
+  min-height: 100%;
 }
 
 .home-body {
   padding-top: 45px;
 }
 
-.details-left {
-  //text-align: center;
+.app {
+  min-height: 100%;
+}
+
+.container-fluid {
+  height: auto;
+}
+
+.side-bar {
+  position: fixed;
+}
+
+.forum-post {
+  background-color: white;
+  min-height: 120px;
+  width: 100%;
+  border-radius: 30px;
+}
+
+.post-user {
+  top: 0px;
+  padding-right: 25px;
+  display: inline-block;
+  height: 100%;
+  max-height: 120px;
+  max-width: 150px;
+  border-radius: 30px;
+}
+
+.post-message {
+  top: 0%;
+  vertical-align: top;
+  display: inline-block;
+  height: 100%;
+
+  small {
+    display: block;
+    color: grey;
+    padding-bottom: 5px;
+  }
+}
+
+.post-row {
+  padding: 20px 0;
+  min-width: 50%;
+  .post-row {
+    margin-left: 30px;
+    .post-row {
+      margin-left: 60px;
+      .post-row {
+        margin-left: 90%;
+      }
+    }
+  }
+  .post-row:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.post-footer {
+  padding-top: 9px;
+  padding-left: 15px;
+  // align-items: center;
+
+  .liked {
+    color: red;
+  }
+
+  .not-liked {
+    color: grey;
+  }
+}
+
+.reply-btn {
+  cursor: pointer;
+}
+
+.modal-details {
+  color: grey;
+  font-size: 0.7em;
+}
+
+.pull-left {
+  float: left;
+}
+
+textarea {
+  width: 100%;
+  resize: none !important;
+  overflow: auto;
+}
+
+.post-btn-col {
+  height: 100%;
+}
+
+.post-btn-row {
+  padding-left: 15px;
+  height: 100%;
+  align-items: center;
+}
+
+.post-btn {
+  margin: 0px 5px !important;
+}
+
+.user-details {
+  padding-bottom: 25px;
+}
+
+.details-btn {
+  margin-left: 10px;
 }
