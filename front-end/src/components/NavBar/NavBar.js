@@ -29,7 +29,7 @@ export const NavBar = (props) => {
                 </NavbarBrand>
                 <Nav className="mr-auto">
                     <Nav.Link href='/' active={props.location.pathname == '/'}><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
-                    <Nav.Link href='/forum' active={props.location.pathname.includes('/forum')}>Forum</Nav.Link>
+                    <Nav.Link href='/discussions' active={props.location.pathname.includes('/discussions')}>Forum</Nav.Link>
                 </Nav>
                 <Nav className='login-nav'>
                     {!user ? 
