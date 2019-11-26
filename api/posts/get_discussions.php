@@ -14,7 +14,7 @@ $db = $database->connection();
 
 $query = "SELECT *
 		FROM discussions
-		ORDER BY discussionid ASC";
+		ORDER BY discussionId ASC";
 
 
 $statement = $db->prepare($query); 
@@ -28,7 +28,7 @@ if (!$statement->execute()) {
 	
 	$data = array();
 	while($row = $statement->fetch()) {
-		$id = $row['discussionid'];
+		$id = $row['discussionId'];
 		$query = "SELECT * FROM forum WHERE discussion = $id";
 		
 		$stmt = $db->prepare($query);
@@ -40,7 +40,7 @@ if (!$statement->execute()) {
 		}else{
 			$count = $stmt->rowCount();
 		}
-		array_push($data, array("discussionid" => $id,  "discussionname" => $row['name'], "posts" => $count));
+		array_push($data, array("discussionId" => $id,  "discussionname" => $row['name'], "posts" => $count));
 	}
 	
 		http_response_code(200);
