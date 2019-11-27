@@ -6,6 +6,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../config/core.php';
 include_once '../config/database.php';
+include_once './model/discussionDto.php';
 
 
 
@@ -28,7 +29,7 @@ if (!$statement->execute()) {
 	
 	$data = array();
 	while($row = $statement->fetch()) {
-		$id = $row['discussionId'];
+		$discussion = new DiscussionDto($row);
 		$query = "SELECT * FROM forum WHERE discussion = $id";
 		
 		$stmt = $db->prepare($query);
@@ -40,7 +41,10 @@ if (!$statement->execute()) {
 		}else{
 			$count = $stmt->rowCount();
 		}
-		array_push($data, array("discussionId" => $id,  "discussionname" => $row['name'], "posts" => $count));
+
+		$discussion->postCount = $count;
+
+		array_push($data, json_decode($discussion));
 	}
 	
 		http_response_code(200);
