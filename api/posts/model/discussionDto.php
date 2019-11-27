@@ -7,6 +7,6 @@ class DiscussionDto {
 
     public function __construct($row) {
         $this->id = $row['discussionId'];
-        $this->name = $row['discussionname'];
+        $this->name = $row['name'];
     }
 }

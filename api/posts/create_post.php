@@ -33,7 +33,7 @@ validateJWTId($jwt, $data->userId);
 $post->setuserId($data->userId);
 $post->setDiscID($data->discussionId);
 $post->setPost($data->post);
-$post->setParent($data->parentid);
+$post->setParent($data->parentId);
  
 
 if(!empty($post->getuserId())){

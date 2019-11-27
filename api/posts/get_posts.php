@@ -53,7 +53,7 @@ if ($id != null) {
 			}
 			$username = $userService->getById($row['userId'])->getUsername();
 			
-			array_push($data, array("postId" => $row['postId'],"userId" => $row['userId'] ,"username" => $username, "parent" => $row['parentpostId'], "post" => $row['post'], "likes" => $likes, "time" => $row['time']));
+			array_push($data, array("postId" => $row['postId'],"userId" => $row['userId'] ,"username" => $username, "parent" => $row['parentPostID'], "post" => $row['post'], "likes" => $likes, "time" => $row['time']));
 		}
 		http_response_code(200);
 		echo json_encode($data);

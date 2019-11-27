@@ -30,7 +30,7 @@ if (!$statement->execute()) {
 	$data = array();
 	while($row = $statement->fetch()) {
 		$discussion = new DiscussionDto($row);
-		$query = "SELECT * FROM forum WHERE discussion = $id";
+		$query = "SELECT * FROM forum WHERE discussion = $discussion->id";
 		
 		$stmt = $db->prepare($query);
 		
@@ -44,7 +44,7 @@ if (!$statement->execute()) {
 
 		$discussion->postCount = $count;
 
-		array_push($data, json_decode($discussion));
+		array_push($data, $discussion);
 	}
 	
 		http_response_code(200);
