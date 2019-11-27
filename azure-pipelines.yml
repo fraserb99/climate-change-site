@@ -19,19 +19,20 @@ steps:
     cd front-end
     npm install
     npm run build
+    dir
   displayName: 'npm install and build'
 
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/build'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/build.zip'
-    replaceExistingArchive: true
+# - task: ArchiveFiles@2
+#   inputs:
+#     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/build'
+#     includeRootFolder: true
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/build.zip'
+#     replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/build.zip'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/front-end/build'
     ArtifactName: 'drop'
     publishLocation: 'Container'
