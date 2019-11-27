@@ -5,7 +5,7 @@ class DiscussionDto {
     public $name;
     public $postCount;
 
-    public DiscussionDto($row) {
+    public function __construct($row) {
         $this->id = $row['discussionId'];
         $this->name = $row['discussionname'];
     }

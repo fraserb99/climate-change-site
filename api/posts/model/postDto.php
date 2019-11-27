@@ -8,7 +8,7 @@ class PostDto {
 	public $message;
     public $likes;
     
-    public PostDto($row) {
+    public function __construct($row) {
         $this->id = $row['postId'];
         $this->userId = $row['userId'];
         $this->$discussionId = $row['discussionId'];

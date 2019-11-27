@@ -18,11 +18,11 @@ export const DiscussionPage = ({...props}) => {
     //         description: 'A place to talk about fish'
     //     }]
 
-    const [discussions, setDiscussions] = useState([]);
+    const [discussions, setDiscussions] = useState(null);
 
     useEffect(() => {
         const disc = getDiscussions();
-        setDiscussions(null);
+        setDiscussions(disc);
     }, [])
 
     return (
