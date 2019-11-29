@@ -21,13 +21,17 @@ export const DiscussionPage = ({...props}) => {
     const [discussions, setDiscussions] = useState(null);
 
     useEffect(() => {
-        const disc = getDiscussions();
-        setDiscussions(disc);
+        const fetchDisc = async () => {
+            const disc = await getDiscussions();
+            console.log(disc);
+            setDiscussions(disc);
+        }
+        fetchDisc();
     }, [])
 
     return (
     <Row>
-        <LeftSideBar title='Forum' />
+        <LeftSideBar title='Discussions' />
         
         <Col lg={{span: 9, offset: 0}} className='home-content'>
                 <div className='home-body'>
