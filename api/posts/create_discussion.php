@@ -57,6 +57,7 @@ function createDiscussion($db, $discussion){
 		
 		
 		if($statement->execute()){
+			echo json_encode(array("response" => "Success"));
 			return true;
 		}
 		print_r($statement->errorInfo());

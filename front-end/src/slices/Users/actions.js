@@ -1,4 +1,4 @@
-import { buildUrl } from '../../infrastructure/api/config';
+import { buildUrl, apiRequest } from '../../infrastructure/api/config';
 import { getCookie } from '../../infrastructure/login/sessions';
 
 export const getUser = (id) => {
@@ -19,3 +19,4 @@ export const updateUser = (user) => {
         body: JSON.stringify(user)
     });
 }
+

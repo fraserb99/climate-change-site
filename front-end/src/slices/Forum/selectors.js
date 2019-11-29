@@ -1,13 +1,19 @@
 
 
-export const formatPosts = (posts, parent, userId) => {
+export const formatPosts = (posts, parent, userId, likes) => {
     var formattedPosts = posts.filter(post => post.parent === parent);
     console.log(formattedPosts);
 
     formattedPosts = formattedPosts.map(post => {
-        const childPosts = formatPosts(posts, post.postId, userId);
+        const childPosts = formatPosts(posts, post.postId, userId, likes);
         const canDelete = userId === post.userId;
-        return {...post, posts: childPosts, canDelete}
+        const liked = !!likes.find(x => x.postId === post.postId);
+        return {
+            ...post, 
+            posts: childPosts, 
+            canDelete,
+            liked
+        }
     })
 
     return formattedPosts;

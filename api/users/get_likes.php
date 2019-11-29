@@ -8,6 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once 'model/user.php';
 include_once 'user_service.php';
+include_once 'model/likeDto.php';
 
 include_once '../config/core.php';
 include_once '../library/php-jwt-master/src/BeforeValidException.php';
@@ -25,4 +26,26 @@ $userService = new UserService($db);
 
 $token = getBearerToken();
 $jwt = decodeJWT($token);
-$user = $userService->getById($id);
+$id = $jwt->data->id;
+
+if ($id) {
+    $query = "SELECT * from likes 
+        WHERE userId = ?";
+
+    $stmt = $db->prepare($query);
+    $stmt->bindValue(1, $id);
+
+    if (!$stmt->execute()) {
+        print_r($stmt->errorInfo());
+        http_response_code(500);
+        echo json_encode(array("response" => "Query failed"));
+        exit(0);
+    } else {
+        $likes = array();
+        while ($row = $stmt->fetch()) {
+            $like = new likeDto($row);
+            array_push($likes, $like);
+        }
+        echo json_encode($likes);
+    }
+}

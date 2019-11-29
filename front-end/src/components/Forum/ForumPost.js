@@ -5,25 +5,35 @@ import { faArrowUp, faHeart, faTrashAlt } from '@fortawesome/free-solid-svg-icon
 import { ForumPostInput } from './ForumPostInput';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
 import toastr from 'toastr';
-import { getPosts, createPost } from '../../slices/Forum/actions';
+import { getPosts, createPost, likePost, unlikePost } from '../../slices/Forum/actions';
 
 export const ForumPost = ({post, initShowChildren, ...props}) => {
     const [likes, setLikes] = useState(post.likes || 0);
-    const [liked, setLiked] = useState();
+    const [liked, setLiked] = useState(post.liked);
     const [showReply, setShowReply] = useState(false);
     const [showChildren, setShowChildren] = useState(initShowChildren || false)
     const {user, setUser} = useContext(UserContext);
     const discussionId = props.match.params.discussionId;
     
     const handleLiked = useCallback((like) => {
-        setLikes(likes + (like ? 1 : -1));
-        setLiked(like);
+        var success = false;
+        if (like) {
+            success = handleLike(post.postId);
+        } else {
+            success = handleUnlike(post.postId);
+        }
+        console.log(success);
+        if (success) {
+            setLikes(likes + (like ? 1 : -1));
+            setLiked(like);
+        }
     })
 
     const handleSubmit = useCallback(async (values, {setSubmitting, setFieldError}) => {
         return createPost(values).then(() => {
             setShowReply(false);
             props.updatePosts();
+            setShowChildren(true);
         }).catch((e) => {
             console.error(e);
             setFieldError('post', 'Unable to create post');
@@ -38,6 +48,23 @@ export const ForumPost = ({post, initShowChildren, ...props}) => {
         } else {
             setShowReply(!showReply)
         }
+    })
+
+    const handleLike = useCallback(async (postId) => {
+        await likePost(postId, user.id)
+            .catch((e) => {
+                return false;
+            })
+        return true;
+    })
+
+    const handleUnlike = useCallback(async (postId) => {
+        const result = await unlikePost(postId, user.id)
+            .catch((e) => {
+                return false;
+            });
+        
+        return true;
     })
 
     return (

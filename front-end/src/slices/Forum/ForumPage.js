@@ -1,37 +1,52 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback, useContext, useMemo } from 'react';
 import { LeftSideBar } from '../../components/LeftSideBar/LeftSideBar';
 import { Row, Col, Button } from 'react-bootstrap';
 import { ForumPost } from '../../components/Forum/ForumPost';
 import { LogInModal } from '../../components/LogIn/LoginModal';
-import { getPosts, getDiscussions, createPost } from './actions';
+import { getPosts, getDiscussions, createPost, getLikes } from './actions';
 import { formatPosts } from './selectors';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
 import { ForumPostInput } from '../../components/Forum/ForumPostInput';
 
 export const ForumPage = ({...props}) => {
     const [posts, setPosts] = useState();
+    const [renderPosts, setRenderPosts] = useState();
     const [discussion, setDiscussion] = useState();
-    console.log(props);
+    const [likes, setLikes] = useState();
+
     const {user, setUser} = useContext(UserContext);
     const discussionId = props.match.params.discussionId;
     const [showAddPost, setShowAddPost] = useState(false);
 
     const updatePosts = useCallback(async () => {
         const result = await getPosts(discussionId);
-        const formatted = formatPosts(result, '0', user.id);
-        console.log(formatted);
-        setPosts(formatted);
+        setPosts(result);
     })
 
-    const fetchDisc = async () => {
+    const fetchDisc = useCallback(async () => {
         const disc = await getDiscussions();
         setDiscussion(disc.find(x => x.id === discussionId));
-    }
+    })
+
+    const fetchLikes = useCallback(async () => {
+        if (user) {
+            const l = await getLikes();
+            setLikes(l);
+        }
+    })
 
     useEffect(() => {
         updatePosts();
         fetchDisc();
+        fetchLikes();
     }, []);
+
+    useEffect(() => {
+        if (!posts || !likes) return;
+        const formatted = formatPosts(posts, '0', user.id, likes);
+        console.log(formatted);
+        setRenderPosts(formatted);
+    }, [posts, likes])
 
     const handleSubmit = useCallback(async (values, {setSubmitting, setFieldError}) => {
         return createPost(values).then(() => {
@@ -75,8 +90,14 @@ export const ForumPage = ({...props}) => {
                                 handleSubmit={handleSubmit} 
                             />
                         }
-                        {posts && posts.map(post => (
-                            <ForumPost post={post} setShowLoginModal={setShowLoginModal} initShowChildren updatePosts={updatePosts} {...props} />
+                        {renderPosts && renderPosts.map(post => (
+                            <ForumPost 
+                                post={post} 
+                                setShowLoginModal={setShowLoginModal} 
+                                initShowChildren 
+                                updatePosts={updatePosts} 
+                                {...props} 
+                            />
                         ))}
                         </div>
                     </Col>

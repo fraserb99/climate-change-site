@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { LeftSideBar } from '../../components/LeftSideBar/LeftSideBar';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import { ForumPost } from '../../components/Forum/ForumPost';
 import { LogInModal } from '../../components/LogIn/LoginModal';
 import { Discussion } from '../../components/Forum/Discussion';
-import { getDiscussions } from './actions';
+import { getDiscussions, createDiscussion } from './actions';
+import { NewDiscussionModal } from '../../components/Forum/NewDiscussionModal';
 
 export const DiscussionPage = ({...props}) => {
     // const discussions = [
@@ -19,15 +20,25 @@ export const DiscussionPage = ({...props}) => {
     //     }]
 
     const [discussions, setDiscussions] = useState(null);
+    const [show, setShowModal] = useState(false);
+
+    const fetchDisc = useCallback(async () => {
+        const disc = await getDiscussions();
+        console.log(disc);
+        setDiscussions(disc);
+    })
 
     useEffect(() => {
-        const fetchDisc = async () => {
-            const disc = await getDiscussions();
-            console.log(disc);
-            setDiscussions(disc);
-        }
         fetchDisc();
     }, [])
+
+    const handleNewDisc = useCallback(async (values) => {
+        return await createDiscussion(values)
+            .then(() => {
+                fetchDisc();
+                setShowModal(false);
+            });
+    })
 
     return (
     <Row>
@@ -35,13 +46,30 @@ export const DiscussionPage = ({...props}) => {
         
         <Col lg={{span: 9, offset: 0}} className='home-content'>
                 <div className='home-body'>
-                    <Col lg={12}>
-                        {discussions && discussions.map(discussion => (
-                            <Discussion discussion={discussion} {...props} />
-                        ))}
-                    </Col>
+                    <Row className='posts-header'>
+                        <h2>
+                            Discussions
+                            <Button onClick={() => 
+                                setShowModal(true)
+                            }>
+                                New Discussion
+                            </Button>
+                        </h2>
+                    </Row>
+                    <div className='posts-content'>
+                        <Col lg={12}>
+                            {discussions && discussions.map(discussion => (
+                                <Discussion discussion={discussion} {...props} />
+                            ))}
+                        </Col>
+                    </div>
                 </div>
         </Col>
+        <NewDiscussionModal
+            show={show} 
+            setShowModal={setShowModal} 
+            handleSubmit={handleNewDisc}
+        />
     </Row>
     )
 }
