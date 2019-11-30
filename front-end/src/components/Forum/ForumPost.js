@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { Row, Col, Collapse } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faHeart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -66,6 +66,11 @@ export const ForumPost = ({post, initShowChildren, ...props}) => {
         
         return true;
     })
+
+    useEffect(() => {
+        setLikes(post.likes);
+        setLiked(post.liked);
+    }, [post])
 
     return (
     <Row className='post-row'>

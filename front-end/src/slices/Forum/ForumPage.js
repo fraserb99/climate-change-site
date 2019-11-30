@@ -4,9 +4,17 @@ import { Row, Col, Button } from 'react-bootstrap';
 import { ForumPost } from '../../components/Forum/ForumPost';
 import { LogInModal } from '../../components/LogIn/LoginModal';
 import { getPosts, getDiscussions, createPost, getLikes } from './actions';
-import { formatPosts } from './selectors';
+import { formatPosts, newestComparator, sortPosts } from './selectors';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
 import { ForumPostInput } from '../../components/Forum/ForumPostInput';
+import Select from 'react-select';
+
+const customStyles = {
+    menu: () => ({
+        width: '140px'
+    })
+}
+
 
 export const ForumPage = ({...props}) => {
     const [posts, setPosts] = useState();
@@ -20,7 +28,8 @@ export const ForumPage = ({...props}) => {
 
     const updatePosts = useCallback(async () => {
         const result = await getPosts(discussionId);
-        setPosts(result);
+        const initPosts = result.sort(newestComparator(true));
+        setPosts(initPosts);
     })
 
     const fetchDisc = useCallback(async () => {
@@ -43,7 +52,7 @@ export const ForumPage = ({...props}) => {
 
     useEffect(() => {
         if (!posts || !likes) return;
-        const formatted = formatPosts(posts, '0', user.id, likes);
+        var formatted = formatPosts(posts, '0', user.id, likes);
         console.log(formatted);
         setRenderPosts(formatted);
     }, [posts, likes])
@@ -58,28 +67,67 @@ export const ForumPage = ({...props}) => {
         })
     })
 
-    const [showLoginModal, setShowLoginModal] = useState(false);
+    const sortOptions = [{
+            label: 'Newest First',
+            value: 'newest'
+        }, {
+            label: 'Most Popular',
+            value: 'popular',
+        }, {
+            label: 'Oldest First',
+            value: 'oldest'
+        }, 
+    ]
 
+    const handleSortChange = useCallback(({value}) => {
+        if (value === 'newest') {
+            const newPosts = sortPosts([...renderPosts], newestComparator(true));
+            setRenderPosts(newPosts);
+        } else if (value === 'oldest') {
+            const newPosts = sortPosts([...renderPosts], newestComparator(false));
+            setRenderPosts(newPosts);
+        } else if (value === 'popular') {
+            const newPosts = sortPosts([...renderPosts],
+                (a, b) => b.likes - a.likes);
+            setRenderPosts(newPosts);
+        }
+    })
+
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    console.log(renderPosts);
     return (
-    <Row>
+    <Row noGutters>
         <LeftSideBar title='Discussions' />
         
         <Col lg={{span: 9, offset: 0}} className='home-content'>
                 <div className='home-body'>
-                    <Col lg={12}>
+                    <Col lg={12} >
                         {discussion && 
-                        <Row className='posts-header'>
-                            <h2>
-                                {discussion.name}
-                                <Button onClick={() => {
-                                    setShowAddPost(!showAddPost);
-                                    if (!showAddPost) {
-                                        window.scrollTo(0, 0);
-                                    }
-                                }}>
-                                    {showAddPost ? 'Cancel Post' : 'Add Post'}
-                                </Button>
-                            </h2>
+                        <Row className='posts-header' noGutters>
+                            <Col lg={12}>
+                                <Col lg={3} className='header-title'>
+                                    <h2>
+                                        {discussion.name}
+                                        <Button onClick={() => {
+                                            setShowAddPost(!showAddPost);
+                                            if (!showAddPost) {
+                                                window.scrollTo(0, 0);
+                                            }
+                                        }}>
+                                            {showAddPost ? 'Cancel Post' : 'Add Post'}
+                                        </Button>
+                                    </h2>
+                                </Col>
+                                <Col lg={2} className='sort-menu'>
+                                    {'Sort: '}
+                                    <Select
+                                        isSearchable={false}
+                                        defaultValue={{label:'Newest First', value:'newest'}}
+                                        onChange={handleSortChange}
+                                        options={sortOptions}
+                                    />
+                                </Col>
+                            </Col>
                         </Row>}
                         <div className='posts-content'>
                         {showAddPost && 

@@ -85,20 +85,34 @@ input:focus {
 }
 
 .home-body {
-  padding-top: 45px;
-
+  // padding-top: 45px;
   .btn {
     margin-left: 20px;
   }
 
   .posts-header {
     position: fixed;
-    padding-bottom: 40px;
     z-index: 100;
+    width: 100%;
+    background-color: white;
+
+    h2 {
+      padding-top: 45px;
+      display: inline-block;
+    }
+
+    .header-title {
+      display: inline-block;
+    }
+
+    .sort-menu {
+      display: inline-block;
+    }
   }
 
   .posts-content {
-    padding-top: 50px;
+    padding-top: 100px;
+    padding-left: 15px;
   }
 }
 
