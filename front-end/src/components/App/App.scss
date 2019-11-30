@@ -3,6 +3,7 @@ $theme-colors: (
 );
 
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Oleo+Script|Open+Sans|Roboto&display=swap');
 
 .App {
   text-align: center;
@@ -82,9 +83,30 @@ input:focus {
   padding: none;
   background-color: rgba($color: white, $alpha: 0.7);
   min-height: 100%;
+  text-align: center;
+}
+.tree-title{
+  font-family: 'Oleo Script', cursive;
+  font-size: 2.5em;
+  margin: 0 10% 0 10%;
 }
 
+.subsections {
+  padding-top: 45px;
+  display: inline-block;
+  font-size: 1.9em;
+  font-family:'Roboto', sans-serif;
+  font-weight: bold;
+}
+.paragraphs{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.3em;
+}
 .home-body {
+  margin: 0 10% 2em 10%;
+  max-width: 100%;
+  text-align: center;
+  ;
   // padding-top: 45px;
   .btn {
     margin-left: 20px;
@@ -95,11 +117,6 @@ input:focus {
     z-index: 100;
     width: 100%;
     background-color: white;
-
-    h2 {
-      padding-top: 45px;
-      display: inline-block;
-    }
 
     .header-title {
       display: inline-block;
