@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from 'react';
-import { Nav, Navbar, NavbarBrand, Container, NavDropdown } from 'react-bootstrap';
+import {Nav, Navbar, NavbarBrand, Container, NavDropdown, CarouselItem} from 'react-bootstrap';
 import NavLink from 'react-bootstrap/NavLink';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,7 +25,8 @@ export const NavBar = (props) => {
             expand='lg'
             >
                 <NavbarBrand>
-                    Climate Change
+                    UTF
+
                 </NavbarBrand>
                 <Nav className="mr-auto">
                     <Nav.Link href='/' active={props.location.pathname == '/'}><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
