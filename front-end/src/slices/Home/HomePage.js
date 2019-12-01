@@ -1,28 +1,8 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-//import {Gallery,GalleryImage} from 'react-gesture-gallery';
 import Carousel from 'react-bootstrap/Carousel'
 import Image from 'react-bootstrap/Image'
-
-import { Row, Col } from 'react-bootstrap';
-
-// function App() {
-//     const [index,setIndex] = React.useState(0)
-//     return (
-//         <Gallery
-//             index={index}
-//             onRequestChange={i => {
-//                 setIndex(i);
-//             }}
-//         >
-//             {images.map(image => (
-//                 <GalleryImage src={image}/>
-//             ))}
-//         </Gallery>
-//     );
-// }
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(<App />, rootElement);
+import {Row, Col, CarouselItem} from 'react-bootstrap';
 
 export const HomePage = () => (
     <Row>
@@ -31,13 +11,28 @@ export const HomePage = () => (
 </div>
 </Col>
 
-
     <Col lg={{span: 12, offset: 0}} className='home-content'>
     <div className='home-body'>
-    <h1 className='tree-title'>Tree Hugging is my life (Need to change this)</h1>
+    <h1 className='tree-title'>United Tree Front</h1>
+        <Carousel>
+        <CarouselItem interval={2000}>
+            <img src={require('../Home/koala.jpg')} width={400} height={250}/>
+        </CarouselItem>
+        <CarouselItem interval={2000}>
+            <img src={require('../Home/polar.jpg')} width={400} height={250}/>
+        </CarouselItem>
+        <CarouselItem interval={2000}>
+            <img src={require('../Home/panda.jpg')} width={400} height={250}/>
+        </CarouselItem>
+        <CarouselItem interval={2000}>
+            <img src={require('../Home/turtle.jpg')} width={400} height={250}/>
+        </CarouselItem>
+        </Carousel>
+
+
     <h2 className='subsections'>Who are we?</h2>
     <p className='paragraphs'>
-    (Insert decent name here) are climate change activists that believe in changing the world by planting more trees to reduce CO2 emissions into the atmosphere.
+    United Tree Front are climate change activists that believe in changing the world by planting more trees to reduce CO2 emissions into the atmosphere.
     We take pride in the effort we make in making a global impact on climate change and you can start helping today. Any discussion you would like to have head
     on over to our forums.
     </p>
@@ -55,28 +50,6 @@ export const HomePage = () => (
     Climate change is cripling the world that we live in, if nothing is done to combat the rapid changes to our planet
     this will have serious implications to our daily lifes. This is what forrests should look like:
     </p>
-        <p className='slides'>
-        <Carousel interval={4000} >
-            <Carousel.Item>
-                <Image
-                    src='forest1-min.jpg'
-
-                />
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    src='forest2-min.jpg'
-                    alt="Second slide"
-                ></img>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    src="forest3-min.jpg"
-                    alt="Third slide"
-                ></img>
-            </Carousel.Item>
-        </Carousel>
-        </p>
 
     <h2 className='subsections'>Possible solutions</h2>
     <p className='paragraphs'>
@@ -87,7 +60,7 @@ export const HomePage = () => (
 
     </p>
     <h2 className='subsections'>Videos on climate change</h2>
-<p className='paragraphs'>
+    <p className='paragraphs'>
 
 
     <iframe width="420" height="245"
@@ -106,21 +79,19 @@ export const HomePage = () => (
     src="https://www.youtube.com/embed/oJAbATJCugs" frameborder="0"
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
     </iframe>
-</p>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <p>
-            <a className="twitter-timeline" data-lang="en" data-theme="dark"
-               href="https://twitter.com/UNFCCC?ref_src=twsrc%5Etfw">Tweets by UNFCCC</a>
-            <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
-        </p>
+    </p>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <p>
+        <a className="twitter-timeline" data-lang="en" data-theme="dark"
+           href="https://twitter.com/UNFCCC?ref_src=twsrc%5Etfw">Tweets by UNFCCC</a>
+        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+    </p>
     <footer>
     <p>Contact information: <a href="">HelpSaveOurPlantWithTrees@treemail.com</a></p>
     </footer>
-
-
 </div>
 </Col>
 </Row>
