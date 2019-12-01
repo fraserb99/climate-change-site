@@ -11,7 +11,7 @@ export const CarbonTrackerPage = props => {
             <LeftSideBar title='CO2 Tracker' />
 
             <Col lg={9} className='home-content'>
-                <div className='home-body'>
+                <div className='page-body'>
                     <Button onClick={() => setShowModal(true)}>
                         Show Modal
                     </Button>

@@ -100,7 +100,7 @@ export const ForumPage = ({...props}) => {
         <LeftSideBar title='Discussions' />
         
         <Col lg={{span: 9, offset: 0}} className='home-content'>
-                <div className='home-body'>
+                <div className='page-body'>
                     <Col lg={12} >
                         {discussion && 
                         <Row className='posts-header' noGutters>

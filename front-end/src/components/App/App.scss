@@ -83,7 +83,7 @@ input:focus {
   padding: none;
   background-color: rgba($color: white, $alpha: 0.7);
   min-height: 100%;
-  text-align: center;
+  // text-align: center;
 }
 .tree-title{
   font-family: 'Oleo Script', cursive;
@@ -110,6 +110,38 @@ input:focus {
   // padding-top: 45px;
   .btn {
     margin-left: 20px;
+  }
+
+  .posts-header {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    background-color: white;
+
+    .header-title {
+      display: inline-block;
+    }
+
+    .sort-menu {
+      display: inline-block;
+    }
+  }
+
+  .posts-content {
+    padding-top: 100px;
+    padding-left: 15px;
+  }
+}
+
+
+.page-body {
+  // padding-top: 45px;
+  .btn {
+    margin-left: 20px;
+  }
+
+  h2 {
+    padding-top: 45px;
   }
 
   .posts-header {

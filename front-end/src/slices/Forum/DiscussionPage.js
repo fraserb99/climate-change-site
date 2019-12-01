@@ -45,7 +45,7 @@ export const DiscussionPage = ({...props}) => {
         <LeftSideBar title='Discussions' />
         
         <Col lg={{span: 9, offset: 0}} className='home-content'>
-                <div className='home-body'>
+                <div className='page-body'>
                     <Row className='posts-header'>
                         <h2>
                             Discussions

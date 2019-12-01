@@ -111,7 +111,13 @@ const MapModal = ({show, setShowModal, values, google, setFieldValue, setFieldEr
                     <Button onClick={checkAddresses}>Check</Button>
                 </Col>
             </Row>
-            <MapContainer google={google} route={route} {...props} />
+            <MapContainer 
+                google={google} 
+                route={route} 
+                startPos={startPos}
+                endPos={endPos}
+                {...props} 
+            />
         </Modal.Body>
         <Modal.Footer>
             <Button
