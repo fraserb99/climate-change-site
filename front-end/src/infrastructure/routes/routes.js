@@ -14,6 +14,7 @@ import { NavBar } from '../../components/NavBar/NavBar';
 import { UserDetailsPage } from '../../slices/Users/Details';
 import { ForumPage } from '../../slices/Forum/ForumPage';
 import { DiscussionPage } from '../../slices/Forum/DiscussionPage';
+import { CarbonTrackerPage } from '../../slices/CarbonTracker/CarbonTrackerPage';
 
 
 const Routes = (props) => {
@@ -29,6 +30,8 @@ const Routes = (props) => {
 
                 <Route exact path='/discussions' component={DiscussionPage} />
                 <Route path='/discussions/:discussionId' component={ForumPage} />
+
+                <Route path='/co2tracker' component={CarbonTrackerPage} />
             </Container>
         </div>)
 }

@@ -9,7 +9,7 @@ export const NewDiscussionModal = ({show, setShowModal, handleSubmit, ...props})
 
     return (
         <Formik
-            initialValues={{discussion: '', userId: user.id}}
+            initialValues={{discussion: '', userId: user && user.id}}
             onSubmit={handleSubmit}
         >
             {({isSubmitting}) => (
