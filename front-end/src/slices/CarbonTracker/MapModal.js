@@ -60,7 +60,7 @@ const MapModal = ({show, setShowModal, values, google, setFieldValue, setFieldEr
                         lng: poly.lng()
                     }))
                 setRoute(directions);
-                console.log(directions);
+                setDistance(result.routes[0].legs[0].distance.value / 1000)
             }
         })
     }, [startPos, endPos])
@@ -77,6 +77,7 @@ const MapModal = ({show, setShowModal, values, google, setFieldValue, setFieldEr
 
     const handleSaveRoute = useCallback(() => {
         alert(distance);
+        setFieldValue('distance', distance)
         setShowModal(false);
     })
     
@@ -111,11 +112,13 @@ const MapModal = ({show, setShowModal, values, google, setFieldValue, setFieldEr
                     <Button onClick={checkAddresses}>Check</Button>
                 </Col>
             </Row>
+            {distance}
             <MapContainer 
                 google={google} 
                 route={route} 
                 startPos={startPos}
                 endPos={endPos}
+                setDistance={setDistance}
                 {...props} 
             />
         </Modal.Body>
