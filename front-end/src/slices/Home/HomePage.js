@@ -1,5 +1,28 @@
 import React from 'react';
+import ReactDOM from "react-dom";
+//import {Gallery,GalleryImage} from 'react-gesture-gallery';
+import Carousel from 'react-bootstrap/Carousel'
+import Image from 'react-bootstrap/Image'
+
 import { Row, Col } from 'react-bootstrap';
+
+// function App() {
+//     const [index,setIndex] = React.useState(0)
+//     return (
+//         <Gallery
+//             index={index}
+//             onRequestChange={i => {
+//                 setIndex(i);
+//             }}
+//         >
+//             {images.map(image => (
+//                 <GalleryImage src={image}/>
+//             ))}
+//         </Gallery>
+//     );
+// }
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
 
 export const HomePage = () => (
     <Row>
@@ -7,6 +30,7 @@ export const HomePage = () => (
     <div className='page-header'>
 </div>
 </Col>
+
 
     <Col lg={{span: 12, offset: 0}} className='home-content'>
     <div className='home-body'>
@@ -29,8 +53,31 @@ export const HomePage = () => (
     <h2 className='subsections'>Effects of Climate Change</h2>
     <p className='paragraphs'>
     Climate change is cripling the world that we live in, if nothing is done to combat the rapid changes to our planet
-    this will have serious implications to our daily lifes.
+    this will have serious implications to our daily lifes. This is what forrests should look like:
     </p>
+        <p className='slides'>
+        <Carousel interval={4000} >
+            <Carousel.Item>
+                <Image
+                    src='forest1-min.jpg'
+
+                />
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                    src='forest2-min.jpg'
+                    alt="Second slide"
+                ></img>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                    src="forest3-min.jpg"
+                    alt="Third slide"
+                ></img>
+            </Carousel.Item>
+        </Carousel>
+        </p>
+
     <h2 className='subsections'>Possible solutions</h2>
     <p className='paragraphs'>
 
@@ -60,9 +107,20 @@ export const HomePage = () => (
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
     </iframe>
 </p>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <p>
+            <a className="twitter-timeline" data-lang="en" data-theme="dark"
+               href="https://twitter.com/UNFCCC?ref_src=twsrc%5Etfw">Tweets by UNFCCC</a>
+            <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+        </p>
     <footer>
-    <p>Contact information: <a href="">HelpSaveOurPlantWithTrees@gmail.com</a></p>
+    <p>Contact information: <a href="">HelpSaveOurPlantWithTrees@treemail.com</a></p>
     </footer>
+
+
 </div>
 </Col>
 </Row>
