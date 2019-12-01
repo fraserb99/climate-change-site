@@ -30,6 +30,7 @@ export const NavBar = (props) => {
                 <Nav className="mr-auto">
                     <Nav.Link href='/' active={props.location.pathname == '/'}><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
                     <Nav.Link href='/discussions' active={props.location.pathname.includes('/discussions')}>Forum</Nav.Link>
+                    <Nav.Link href='/co2tracker' >CO2 Tracker</Nav.Link>
                 </Nav>
                 <Nav className='login-nav'>
                     {!user ? 
