@@ -1,9 +1,7 @@
 import React from 'react';
-import ReactDOM from "react-dom";
 import Carousel from 'react-bootstrap/Carousel'
 import { TwitterTimelineEmbed} from 'react-twitter-embed';
 
-import Image from 'react-bootstrap/Image'
 import {Row, Col, CarouselItem} from 'react-bootstrap';
 
 
@@ -18,6 +16,9 @@ export const HomePage = () => (
     <Col lg={{span: 12, offset: 0}} className='home-content'>
     <div className='home-body'>
     <h1 className='tree-title'></h1>
+        <p className='paragraphs'>
+            This is what we are fighting for.
+        </p>
         <Carousel>
         <CarouselItem interval={2000}>
             <img src={require('../Home/koala.jpg')} width={400} height={250}/>
@@ -36,7 +37,7 @@ export const HomePage = () => (
 
     <h2 className='subsections'>Who are we?</h2>
     <p className='paragraphs'>
-    United Tree Front(UTF) are climate change activists that believe in changing the world by planting more trees to reduce CO2 emissions into the atmosphere.
+    United Tree Front (UTF) are climate change activists that believe in changing the world by planting more trees to reduce CO2 emissions into the atmosphere.
     We take pride in the effort we make in making a global impact on climate change and you can start helping today. Any discussion you would like to have head
     on over to our forums.
     </p>
@@ -93,36 +94,77 @@ export const HomePage = () => (
         These may seem like small changes but if everyone makes the effort then we can stop climate change.
     </p>
     <h2 className='subsections'>What's Going on around the world about climate change</h2>
-    <p className='videos'>
-
-
+    <p className='paragraphs'>
     <iframe width="325" height="200"
     src="https://www.youtube.com/embed/G4H1N_yXBiA" frameborder="0"
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
     </iframe>
+    &ensp;
     <iframe width="325" height="200"
     src="https://www.youtube.com/embed/yvDRQe2oCt4" frameborder="0"
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
     </iframe>
+    &ensp;
     <iframe width="325" height="200"
     src="https://www.youtube.com/embed/vpTHi7O66pI" frameborder="0"
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
     </iframe>
+    &ensp;
     <iframe width="325" height="200"
     src="https://www.youtube.com/embed/oJAbATJCugs" frameborder="0"
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
     </iframe>
     </p>
-        <p className='twitter'>
+        <p className='paragraphs'>
             <TwitterTimelineEmbed
                 sourceType="profile"
                 screenName="UNFCCC"
-                options={{height: 820, width:550}}
+                options={{height: 675, width:1250,theme: 'dark'}}
             />
         </p>
-    <p className='paragraphs'>Contact information: <a href="">HelpSaveOurPlantWithTrees@treemail.com</a></p>
+    </div>
+        <section id="footer">
+            <div class="container">
+                <div class="row text-center text-xs-center text-sm-left text-md-left">
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h5>Quick links</h5>
+                        <ul class="list-unstyled quick-links">
+                            <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-info-circle"></i>About</a></li>
+                            <li><a href="discussions"><i class="fa fa-comments-o"></i>Forums</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-question-circle"></i>Help</a></li>
+                        </ul>
+                    </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="javascript:void();"><i class="fa fa-address-book"></i>84 Tree Lane</a></li>
+                        <li><a href="javascript:void();"><i className="fa fa-address-book"></i>Treetown</a></li>
+                        <li><a href="javascript:void();"><i className="fa fa-address-book"></i>CB8 9PX</a></li>
+                        <li><a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcRzCMnMQRdhqzgPrcNbCFhZMVvJLJnjBvXmvJvvnvVghSZhbhfwrxRDvkkVfwwFFtLDZmlKj">
+                            <i class="fa fa-envelope"></i>HelpSaveOurPlanetWithTrees@treemail.com</a></li>
+                    </ul>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                        <ul class="list-unstyled list-inline social text-center">
+                            <li class="list-inline-item"><a href="https://www.facebook.com/UNclimatechange/"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="https://twitter.com/search?q=climate%20change&src=typed_query"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.instagram.com/unfccc/?hl=en"><i class="fa fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.google.com/search?safe=active&rlz=1C1CHBF_en-GBGB773GB773&sxsrf=ACYBGNTHVTq6oycUH1cpy6JO6Di0_6tv9A%3A1575326406771&ei=xpLlXfXYLoGD8gLTkZPgAw&q=climate+change&oq=climate+ch&gs_l=psy-ab.3.0.35i39l3j0i131i67j0i67l3j0i131i67j0i67l2.5697.6936..8056...0.1..0.99.828.10......0....1..gws-wiz.......0i71.o4V85DcVOQA">
+                            <i class="fa fa-google"></i></a></li>
 
-</div>
+                        </ul>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <p class="h6"><i class="fa fa-copyright"></i>All right Reversed. United Tree Front</p>
+                </div>
+    </div>
+    </div>
+    </section>
 </Col>
 </Row>
 )

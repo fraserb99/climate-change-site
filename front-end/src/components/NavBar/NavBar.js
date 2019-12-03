@@ -25,7 +25,7 @@ export const NavBar = (props) => {
             expand='lg'
             >
                 <NavbarBrand>
-                    UTF
+                    UTF &thinsp;<i class="fa fa-tree"></i>
 
                 </NavbarBrand>
                 <Nav className="mr-auto">
