@@ -1,4 +1,5 @@
 import {apiRequest, buildUrl} from '../../infrastructure/api/config';
+import { CoverageSummary } from 'istanbul-lib-coverage';
 
 const apiBase = 'http://www.fueleconomy.gov/ws/rest/';
 
@@ -28,4 +29,18 @@ export const createJourney = (values) => {
         mode: 'cors',
         body: JSON.stringify(values)
     }, true)
+}
+
+export const deleteJourney = (values) => {
+    return apiRequest(buildUrl('journey/delete.php'), {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(values)
+    }, true)
+}
+
+export const getLeaderboard = () => {
+    return apiRequest(buildUrl('journey/get_leaderboard.php'), {
+        method: 'GET',
+    }, false)
 }

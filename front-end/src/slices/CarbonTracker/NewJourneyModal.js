@@ -43,7 +43,7 @@ export const NewJourneyModal = ({show, setShowModal, journeys, setJourneys, ...p
     return (
         <Formik
             initialValues={{
-                userId: user.id,
+                userId: user && user.id,
                 type: '',
                 distance: '',
                 start: '',

@@ -340,11 +340,8 @@ textarea {
 .carbon-table {
   margin-top: 45px;
   border-radius: 6px;
-
-  .table-title {
-    padding-left: 10px;
-    margin: 10px 0;
-  }
+  max-height: calc(100vh - 120px);
+  padding-right: 15px;
 }
 
 .stats {
@@ -453,4 +450,9 @@ section .section-title {
     padding-bottom: 0px;
     margin-bottom: 10px;
   }
+}
+
+.journey-delete {
+  color: red !important;
+  background-color: white !important;
 }
