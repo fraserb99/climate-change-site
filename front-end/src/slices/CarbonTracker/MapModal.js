@@ -43,8 +43,6 @@ const MapModal = ({show, setShowModal, values, google, setFieldValue, setFieldEr
     })
 
     useEffect(() => {
-        console.log(startPos);
-        console.log(endPos)
         if (!startPos || !endPos) return;
         const directionService = new google.maps.DirectionsService();
 
@@ -60,14 +58,13 @@ const MapModal = ({show, setShowModal, values, google, setFieldValue, setFieldEr
                         lng: poly.lng()
                     }))
                 setRoute(directions);
-                setDistance(result.routes[0].legs[0].distance.value / 1000)
+                setDistance((result.routes[0].legs[0].distance.value / 1000) * (5/8))
             }
         })
     }, [startPos, endPos])
 
     const checkAddresses = useCallback(() => {
         const geocoder = new google.maps.Geocoder();
-        console.log(geocoder)
 
         geocoder.geocode({address: values.start}, handleStartCheck)
         geocoder.geocode({address: values.end}, handleEndCheck)
@@ -76,7 +73,6 @@ const MapModal = ({show, setShowModal, values, google, setFieldValue, setFieldEr
     })
 
     const handleSaveRoute = useCallback(() => {
-        alert(distance);
         setFieldValue('distance', distance)
         setShowModal(false);
     })
@@ -112,7 +108,6 @@ const MapModal = ({show, setShowModal, values, google, setFieldValue, setFieldEr
                     <Button onClick={checkAddresses}>Check</Button>
                 </Col>
             </Row>
-            {distance}
             <MapContainer 
                 google={google} 
                 route={route} 
@@ -123,6 +118,7 @@ const MapModal = ({show, setShowModal, values, google, setFieldValue, setFieldEr
             />
         </Modal.Body>
         <Modal.Footer>
+            {distance && `Distance: ${distance} miles`}
             <Button
                 onClick={handleSaveRoute}
                 disabled={!startValid || !endValid}
