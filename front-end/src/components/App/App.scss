@@ -81,10 +81,17 @@ input:focus {
 
 .home-content {
   padding: none;
-  background-color: rgba($color: gray, $alpha: 0.7);
-  min-height: 100%;
+  background-color: rgba($color: gray, $alpha: 0.3);
+  min-height: calc(100vh - 57px);
   // text-align: center;
 }
+
+.page-content {
+  background-color: rgba($color: gray, $alpha: 0.7);
+  max-height: calc(100vh - 57px);
+  overflow-y: hidden;
+}
+
 .tree-title{
   font-family:'Roboto', sans-serif;
   font-weight: bold;
@@ -151,6 +158,8 @@ float: left;
 
 .page-body {
   // padding-top: 45px;
+  overflow: auto;
+  max-height: calc(100vh - 70px);
   .btn {
     margin-left: 20px;
   }
@@ -184,11 +193,12 @@ float: left;
   min-height: 100%;
 }
 
-.container-fluid {
-  height: auto;
-}
+// .container-fluid {
+//   height: 100vh;
+// }
 
 .side-bar {
+  padding-top: 100px;
   position: fixed;
 }
 
@@ -318,6 +328,52 @@ textarea {
   max-height: 500px;
   overflow-y: scroll;
 }
+
+.carbon-plus {
+  background-color: rgba($color: red, $alpha: 0.7);
+}
+
+.carbon-minus {
+  background-color: rgba($color: green, $alpha: 0.7);
+}
+
+.carbon-table {
+  margin-top: 45px;
+  border-radius: 6px;
+
+  .table-title {
+    padding-left: 10px;
+    margin: 10px 0;
+  }
+}
+
+.stats {
+  background-color: white;
+  border-radius: 3px;
+  font-size: larger;
+  // position: fixed;
+
+  tr {
+    td {
+      padding: 5px;
+    }
+
+    .pos {
+      background-color: red;
+      color: white;
+      border-radius: 6px;
+      padding: 3px;
+    }
+
+    .neg {
+      background-color: green;
+      color: white;
+      border-radius: 6px;
+      padding: 3px;
+    }
+  }
+}
+
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 section {
   padding: 1.5em 0;
