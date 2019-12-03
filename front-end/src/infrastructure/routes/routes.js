@@ -15,10 +15,10 @@ import { UserDetailsPage } from '../../slices/Users/Details';
 import { ForumPage } from '../../slices/Forum/ForumPage';
 import { DiscussionPage } from '../../slices/Forum/DiscussionPage';
 import { CarbonTrackerPage } from '../../slices/CarbonTracker/CarbonTrackerPage';
+import { Link } from 'react-router-dom';
 
 
 const Routes = (props) => {
-    console.log(props);
     return (
         <div className='app'>
             <NavBar {...props} />

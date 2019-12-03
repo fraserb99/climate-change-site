@@ -9,6 +9,7 @@ import { getJWTUser } from '../../infrastructure/login/sessions';
 import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 export const LogInModal = ({show, setShowModal}) => {
 
@@ -58,7 +59,7 @@ export const LogInModal = ({show, setShowModal}) => {
                             <TextRow name='password' type='password' label='Password: ' />
                             
                             <small>
-                                Don't have an account yet? <a href='/createaccount'>Create one</a>
+                                Don't have an account yet? <Link to='/createaccount'>Create one</Link>
                             </small>
                         </Modal.Body>
                         <Modal.Footer>

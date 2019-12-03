@@ -18,7 +18,6 @@ export const UserDetailsPage = (props) => {
             }
 
             const body = await response.json();
-            console.log(body);
             setUser(body.user);
         }).catch((e) => {
             console.log(e);

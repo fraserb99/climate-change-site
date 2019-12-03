@@ -51,11 +51,15 @@ export const ForumPage = ({...props}) => {
     }, []);
 
     useEffect(() => {
-        if (!posts || !likes) return;
-        var formatted = formatPosts(posts, '0', user.id, likes);
-        console.log(formatted);
+        if (!posts) return;
+        var formatted;
+        if (likes && user) {
+            formatted = formatPosts(posts, '0', user.id, likes);
+        } else {
+            formatted = formatPosts(posts, '0');
+        }
         setRenderPosts(formatted);
-    }, [posts, likes])
+    }, [posts, likes]);
 
     const handleSubmit = useCallback(async (values, {setSubmitting, setFieldError}) => {
         return createPost(values).then(() => {
@@ -94,7 +98,6 @@ export const ForumPage = ({...props}) => {
     })
 
     const [showLoginModal, setShowLoginModal] = useState(false);
-    console.log(renderPosts);
     return (
     <Row noGutters>
         <LeftSideBar title='Discussions' />
@@ -105,10 +108,14 @@ export const ForumPage = ({...props}) => {
                         {discussion && 
                         <Row className='posts-header' noGutters>
                             <Col lg={12}>
-                                <Col lg={3} className='header-title'>
+                                <Col lg={5} className='header-title'>
                                     <h2>
                                         {discussion.name}
                                         <Button onClick={() => {
+                                            if (!user) {
+                                                setShowLoginModal(true);
+                                                return;
+                                            }
                                             setShowAddPost(!showAddPost);
                                             if (!showAddPost) {
                                                 window.scrollTo(0, 0);

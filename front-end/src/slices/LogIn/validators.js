@@ -6,7 +6,6 @@ export const validateLogin = (values) => {
     validateUsername(values, errors);
 
     validatePassword(values, errors);
-    console.log(errors);
     return errors;
 }
 
@@ -32,10 +31,6 @@ const validatePassword = (values, errors) => {
     if (!values.password) {
         errors.password = 'Please enter a password';
     }
-
-    // if (values.password.length < 6) {
-    //     return 'Password must be 6 characters or more'
-    // }
 }
 
 const validateEmail = (values, errors) => {

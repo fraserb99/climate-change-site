@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { LeftSideBar } from '../../components/LeftSideBar/LeftSideBar';
 import { Row, Col, Button } from 'react-bootstrap';
 import { ForumPost } from '../../components/Forum/ForumPost';
@@ -6,25 +6,18 @@ import { LogInModal } from '../../components/LogIn/LoginModal';
 import { Discussion } from '../../components/Forum/Discussion';
 import { getDiscussions, createDiscussion } from './actions';
 import { NewDiscussionModal } from '../../components/Forum/NewDiscussionModal';
+import { UserContext } from '../../infrastructure/contexts/UserContext';
 
 export const DiscussionPage = ({...props}) => {
-    // const discussions = [
-    //     {
-    //         discussionId: 1,
-    //         name: 'Treehugging',
-    //         description: 'A place to talk about trees'
-    //     }, {
-    //         discussionId: 2,
-    //         name: 'Fish',
-    //         description: 'A place to talk about fish'
-    //     }]
+    const [loading, setLoading] = useState(false);
 
     const [discussions, setDiscussions] = useState(null);
     const [show, setShowModal] = useState(false);
+    const {user, setUser} = useContext(UserContext);
 
     const fetchDisc = useCallback(async () => {
         const disc = await getDiscussions();
-        console.log(disc);
+
         setDiscussions(disc);
     })
 
@@ -49,11 +42,14 @@ export const DiscussionPage = ({...props}) => {
                     <Row className='posts-header'>
                         <h2>
                             Discussions
+                            {user ? 
                             <Button onClick={() => 
                                 setShowModal(true)
                             }>
                                 New Discussion
                             </Button>
+                            :
+                            (<small> | Log in to add discussions</small>)}
                         </h2>
                     </Row>
                     <div className='posts-content'>

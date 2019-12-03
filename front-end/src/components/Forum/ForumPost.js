@@ -16,13 +16,16 @@ export const ForumPost = ({post, initShowChildren, ...props}) => {
     const discussionId = props.match.params.discussionId;
     
     const handleLiked = useCallback((like) => {
+        if (!user) {
+            props.setShowLoginModal(true);
+            return;
+        }
         var success = false;
         if (like) {
             success = handleLike(post.postId);
         } else {
             success = handleUnlike(post.postId);
         }
-        console.log(success);
         if (success) {
             setLikes(likes + (like ? 1 : -1));
             setLiked(like);
@@ -44,7 +47,6 @@ export const ForumPost = ({post, initShowChildren, ...props}) => {
         if (user === null && showReply === false) {
             toastr.info('You must be logged in to use the forum');
             props.setShowLoginModal(true);
-            //props.setAfterLogin(setShowReply(true));
         } else {
             setShowReply(!showReply)
         }

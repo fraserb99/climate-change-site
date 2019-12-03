@@ -12,7 +12,6 @@ import toastr from 'toastr';
 
 
 const LogInPage = props => {
-    console.log(props);
     const {user, setUser} = useContext(UserContext);
     const handleSubmit = useCallback(async (values, { setSubmitting, setFieldError }) => {
         try {

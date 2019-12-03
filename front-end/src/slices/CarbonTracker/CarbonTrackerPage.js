@@ -43,12 +43,15 @@ export const CarbonTrackerPage = props => {
     return ( 
         <Row>
             <LeftSideBar title='CO2 Tracker'>
-                <CO2Stats journeys={journeys} />
-                <CO2Leaderboard />
+                <Col lg={3}>
+                    <CO2Stats journeys={journeys} />
+                    <CO2Leaderboard journeys={journeys} />
+                </Col>
             </LeftSideBar>
 
             <Col lg={9} className='page-content'>
                 <div className='page-body'>
+                    {user ? (
                     <Table variant='dark' className='carbon-table'>
                         <thead>
                             <tr>
@@ -81,7 +84,11 @@ export const CarbonTrackerPage = props => {
                                 </tr>
                             ))}
                         </tbody>
-                    </Table>
+                    </Table>)
+                    :
+                    (
+                        <h3>You must be logged in to view your journeys</h3>
+                    )}
                 </div>
             </Col>
             <NewJourneyModal 

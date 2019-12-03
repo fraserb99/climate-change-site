@@ -1,13 +1,12 @@
 import moment from 'moment';
 
-export const formatPosts = (posts, parent, userId, likes) => {
+export const formatPosts = (posts, parent, userId = null, likes = null) => {
     var formattedPosts = posts.filter(post => post.parent === parent);
-    console.log(formattedPosts);
 
     formattedPosts = formattedPosts.map(post => {
         const childPosts = formatPosts(posts, post.postId, userId, likes);
-        const canDelete = userId === post.userId;
-        const liked = !!likes.find(x => x.postId === post.postId);
+        const canDelete = false;
+        const liked = !!(likes && likes.find(x => x.postId === post.postId));
         return {
             ...post, 
             posts: childPosts, 
@@ -38,6 +37,5 @@ export const sortPosts = (posts, sortFn) => {
         ...post,
         posts: sortPosts([...post.posts], sortFn)
     }));
-    console.log(newPosts);
     return newPosts;
 }

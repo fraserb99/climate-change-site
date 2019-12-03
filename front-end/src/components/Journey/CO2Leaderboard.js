@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Row, Col, Table } from 'react-bootstrap';
 import { getLeaderboard } from '../../slices/CarbonTracker/actions';
 
-export const CO2Leaderboard = () => {
+export const CO2Leaderboard = ({journeys}) => {
     const [leaderboard, setLeaderboard] = useState();
 
     const fetchLeaderboard = useCallback(async () => {
@@ -13,19 +13,14 @@ export const CO2Leaderboard = () => {
         }));
 
         board = board.sort((a, b) => a.netCO2 - b.netCO2);
-        board = board.slice(0, 4);
+        board = board.slice(0, 10);
         
         setLeaderboard(board);
     })
 
     useEffect(() => {
         fetchLeaderboard();
-    }, [])
-
-    const displayBoard = useCallback((board) => {
-        const i = 0;
-
-    })
+    }, [journeys])
 
     return (
         <Row>
@@ -33,6 +28,9 @@ export const CO2Leaderboard = () => {
                 <div>
                     <Table size='sm' variant='dark' striped>
                         <thead>
+                            <tr>
+                                <th colSpan={2}>Leaderboard</th>
+                            </tr>
                             <tr>
                                 <th>Username</th>
                                 <th>Net CO2 (kg)</th>

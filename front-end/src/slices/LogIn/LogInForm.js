@@ -5,8 +5,9 @@ import { TextRow } from '../../components/Form/TextRow';
 import { validateLogin, validateNewAccount } from './validators';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
-const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {console.log(props); return(
+const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {return(
     <Formik
         initialValues={{username: '', password: ''}}
         validate={newAccount ? validateNewAccount : validateLogin}
@@ -27,11 +28,11 @@ const LogInForm = ({isSubmitting, newAccount, handleSubmit, ...props}) => {conso
                 </Form>
                     <small className='login-links'>
                         {newAccount ? 
-                            <a href='/login'>Log In</a> 
+                            <Link to='/login'>Log In</Link> 
                             :
-                            <a href='/createaccount'>Create Account</a> 
+                            <Link to='/createaccount'>Create Account</Link> 
                         }
-                        {' '}| <a href='forgotpassword'>Forgotten Password?</a>
+                        {' '}| <Link to='forgotpassword'>Forgotten Password?</Link>
                     </small>
             </Col>
         </Row>}

@@ -22,10 +22,8 @@ const MapContainer = ({google, route, startPos, endPos, ...props}) => {
 
     useEffect(() => {
         if (!startPos || !endPos) return;
-        console.log(startPos);
         const newLat = startPos.location.lat() - ((startPos.location.lat() - endPos.location.lat()) / 2);
         const newLng = startPos.location.lng() - ((startPos.location.lng() - endPos.location.lng()) / 2);
-        console.log(newLat);
 
         var newBounds = new google.maps.LatLngBounds();
         newBounds.extend({

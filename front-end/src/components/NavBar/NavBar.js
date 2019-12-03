@@ -7,12 +7,12 @@ import { faHome, faSign, faSignInAlt, faUser } from '@fortawesome/free-solid-svg
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
 import Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
 
-export const NavBar = (props) => {
+export const NavBar = ({history, ...props}) => {
     const {user, setUser} = useContext(UserContext);
 
     const logout = useCallback(() => {
-        console.log('logout');
         Cookies.set('jwt', null);
         setUser(null);
     });
@@ -25,20 +25,20 @@ export const NavBar = (props) => {
             expand='lg'
             >
                 <NavbarBrand>
-                    UTF &thinsp;<i class="fa fa-tree"></i>
+                    UTF &thinsp;<i className="fa fa-tree"></i>
 
                 </NavbarBrand>
                 <Nav className="mr-auto">
-                    <Nav.Link href='/' active={props.location.pathname == '/'}><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
-                    <Nav.Link href='/discussions' active={props.location.pathname.includes('/discussions')}>Forum</Nav.Link>
-                    <Nav.Link href='/co2tracker' active={props.location.pathname.includes('/co2tracker')}>CO2 Tracker</Nav.Link>
+                    <Nav.Link onClick={() => history.push('/')} active={props.location.pathname == '/'}><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
+                    <Nav.Link onClick={() => history.push('/discussions')} active={props.location.pathname.includes('/discussions')}>Forum</Nav.Link>
+                    <Nav.Link onClick={() => history.push('/co2tracker')} active={props.location.pathname.includes('/co2tracker')}>CO2 Tracker</Nav.Link>
                 </Nav>
                 <Nav className='login-nav'>
                     {!user ? 
-                        <NavLink href='/login'>Log In/Create Account <FontAwesomeIcon icon={faSignInAlt} /></NavLink>
+                        <NavLink onClick={() => history.push('/login')}>Log In/Create Account <FontAwesomeIcon icon={faSignInAlt} /></NavLink>
                         :
                         <NavDropdown title={<span><FontAwesomeIcon icon={faUser} /> {user.username}</span>}>
-                            <DropdownItem href='user/details'>Your Account</DropdownItem>
+                            <DropdownItem onClick={() => history.push('user/details')}>Your Account</DropdownItem>
                             <DropdownItem onClick={() => logout()}>Log Out</DropdownItem>
                         </NavDropdown>
                     }

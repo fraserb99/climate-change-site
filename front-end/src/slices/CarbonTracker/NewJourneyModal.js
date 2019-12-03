@@ -7,6 +7,7 @@ import { JourneyTypeInput } from './JourneyTypeInput';
 import MapModal from './MapModal';
 import { UserContext } from '../../infrastructure/contexts/UserContext';
 import { createJourney } from './actions';
+import { validateCO2Form } from './validators';
 
 export const NewJourneyModal = ({show, setShowModal, journeys, setJourneys, ...props}) => {
     const handleSubmit = useCallback((values) => {
@@ -51,6 +52,7 @@ export const NewJourneyModal = ({show, setShowModal, journeys, setJourneys, ...p
                 carbon: 0
             }}
             onSubmit={handleSubmit}
+            validate={validateCO2Form}
         >
             {({values, setFieldValue, setFieldError, submitForm, resetForm}) =>
             <Modal show={show} onHide={() => setShowModal(false)} centered>
@@ -63,7 +65,7 @@ export const NewJourneyModal = ({show, setShowModal, journeys, setJourneys, ...p
                     <TextRow name='carbon' label='CO2 (kg): ' disabled />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button type='submit' onClick={() => submitForm().then(() => resetForm())}>Save</Button>
+                    <Button type='submit' onClick={() => submitForm()}>Save</Button>
                 </Modal.Footer>
                 <MapModal 
                     show={showMap} 

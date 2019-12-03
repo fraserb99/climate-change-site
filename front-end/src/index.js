@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/scss/bootstrap.scss';
 import './components/App/App.scss';
 import './index.css';
 import App from './components/App/App';
@@ -7,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter basename='/cs312ab'>
         <App />
     </BrowserRouter>, 
     document.getElementById('root'));

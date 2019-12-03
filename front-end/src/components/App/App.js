@@ -12,10 +12,8 @@ import {ToastContainer} from 'react-toastr';
 
 function App(props) {
   let jwt = getCookie('jwt');
-  console.log(jwt);
   var loggedInUser = null;
   if (jwt !== 'null') {
-    console.log(jwt)
     loggedInUser = getJWTUser(jwt);
   }
   const [user, setUser] = useState(loggedInUser);
@@ -24,7 +22,7 @@ function App(props) {
   return (
       <Switch>
         <UserContext.Provider value={{user, setUser}}>
-          <Route path='/' component={Routes} />
+          <Route path='' component={Routes} />
         </UserContext.Provider>
       </Switch>
   );
