@@ -127,12 +127,12 @@ export const HomePage = () => (
             <div class="container">
                 <div class="row text-center text-xs-center text-sm-left text-md-left">
                     <div class="col-xs-12 col-sm-4 col-md-4">
-                        <h5>Quick links</h5>
+                        <h5>Company</h5>
                         <ul class="list-unstyled quick-links">
                             <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                            <li><a href="discussions"><i className="fa fa-comments-o"></i>Forums</a></li>
                             <li><a href="javascript:void();"><i class="fa fa-info-circle"></i>About</a></li>
-                            <li><a href="discussions"><i class="fa fa-comments-o"></i>Forums</a></li>
-                            <li><a href="javascript:void();"><i class="fa fa-question-circle"></i>Help</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-lock"></i>Privacy</a></li>
                         </ul>
                     </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
