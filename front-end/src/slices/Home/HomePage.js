@@ -1,9 +1,12 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel'
 import { TwitterTimelineEmbed} from 'react-twitter-embed';
-
+import { Link } from 'react-router-dom';
 import {Row, Col, CarouselItem} from 'react-bootstrap';
 
+var url1 = new URL('http://localhost:7001/www.facebook.com');
+var url2 = new URL('http://localhost:7001/www.facebook.com');
+var url3 = new URL('http://localhost:7001/www.facebook.com');
 
 export const HomePage = () => (
     <Row>
@@ -123,37 +126,38 @@ export const HomePage = () => (
             />
         </p>
     </div>
+
         <section id="footer">
             <div class="container">
                 <div class="row text-center text-xs-center text-sm-left text-md-left">
                     <div class="col-xs-12 col-sm-4 col-md-4">
                         <h5>Company</h5>
                         <ul class="list-unstyled quick-links">
-                            <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                            <li><a href="discussions"><i className="fa fa-comments-o"></i>Forums</a></li>
-                            <li><a href="javascript:void();"><i class="fa fa-info-circle"></i>About</a></li>
-                            <li><a href="javascript:void();"><i class="fa fa-lock"></i>Privacy</a></li>
+                            <li><Link to='# '><i class="fa fa-home"></i>Home</Link></li>
+                            <li><Link to="discussions"><i className="fa fa-comments-o"></i>Forums</Link></li>
+                            <li><Link to="co2tracker"><i class="fa fa-info-circle"></i>C02 Tracker</Link></li>
                         </ul>
                     </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
                     <h5>Contact Us</h5>
                     <ul class="list-unstyled quick-links">
-                        <li><a href="javascript:void();"><i class="fa fa-address-book"></i>84 Tree Lane</a></li>
-                        <li><a href="javascript:void();"><i className="fa fa-address-book"></i>Treetown</a></li>
-                        <li><a href="javascript:void();"><i className="fa fa-address-book"></i>CB8 9PX</a></li>
-                        <li><a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcRzCMnMQRdhqzgPrcNbCFhZMVvJLJnjBvXmvJvvnvVghSZhbhfwrxRDvkkVfwwFFtLDZmlKj">
-                            <i class="fa fa-envelope"></i>HelpSaveOurPlanetWithTrees@treemail.com</a></li>
+                        <li><Link to="#"><i class="fa fa-address-book"></i>84 Tree Lane</Link></li>
+                        <li><Link to="#"><i className="fa fa-address-book"></i>Treetown</Link></li>
+                        <li><Link to="#">
+                            <i class="fa fa-envelope"></i>HelpSaveOurPlanetWithTrees@treemail.com</Link></li>
                     </ul>
+
                 </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
                         <ul class="list-unstyled list-inline social text-center">
-                            <li class="list-inline-item"><a href="https://www.facebook.com/UNclimatechange/"><i class="fa fa-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="https://twitter.com/search?q=climate%20change&src=typed_query"><i class="fa fa-twitter"></i></a></li>
-                            <li class="list-inline-item"><a href="https://www.instagram.com/unfccc/?hl=en"><i class="fa fa-instagram"></i></a></li>
-                            <li class="list-inline-item"><a href="https://www.google.com/search?safe=active&rlz=1C1CHBF_en-GBGB773GB773&sxsrf=ACYBGNTHVTq6oycUH1cpy6JO6Di0_6tv9A%3A1575326406771&ei=xpLlXfXYLoGD8gLTkZPgAw&q=climate+change&oq=climate+ch&gs_l=psy-ab.3.0.35i39l3j0i131i67j0i67l3j0i131i67j0i67l2.5697.6936..8056...0.1..0.99.828.10......0....1..gws-wiz.......0i71.o4V85DcVOQA">
-                            <i class="fa fa-google"></i></a></li>
+
+                            <li class="list-inline-item"><Link to="#"><i class="fa fa-facebook"></i></Link></li>
+                            <li class="list-inline-item"><Link to="#"><i class="fa fa-twitter"></i></Link></li>
+                            <li class="list-inline-item"><Link to="#"><i class="fa fa-instagram"></i></Link></li>
+                            <li class="list-inline-item"><Link to="#">
+                            <i class="fa fa-google"></i></Link></li>
 
                         </ul>
                     </div>
